@@ -8,9 +8,22 @@
 import UIKit
 import CoreData
 
+import Swinject
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let container: Container = {
+        let container = Container()
+        container.register(BookListViewModel.self) { _ in
+            return BookListViewModel()
+        }
+        container.register(BookListViewController.self) { resolver in
+            let viewModel = resolver.resolve(BookListViewModel.self)!
+            return BookListViewController(viewModel: viewModel)
+        }
+        return container
+    }()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
