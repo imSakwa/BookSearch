@@ -15,18 +15,19 @@ final class BookListViewController: UIViewController {
     
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar(frame: .zero)
-        bar.placeholder = viewModel.sample
+        bar.placeholder = "검색어를 입력해주세요."
         return bar
     }()
     
-    private lazy var tableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        return tableView
+    private lazy var tableViewVC: BookListTableViewController = {
+        let vc = BookListTableViewController(viewModel: BookListViewModel())
+        return vc
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        setupView()
         setupViewLayout()
     }
     
@@ -39,9 +40,32 @@ final class BookListViewController: UIViewController {
 }
 
 extension BookListViewController {
-    private func setupViewLayout() {
+    private func setupView() {
         view.backgroundColor = .white
         navigationItem.titleView = searchBar
+    }
+    
+    private func setupViewLayout() {
+        addChild(tableViewVC)
+        view.addSubview(tableViewVC.tableView)
+        tableViewVC.didMove(toParent: self)
+        
+        tableViewVC.tableView.snp.makeConstraints {
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    private func executeSearch(word: String) {
+//        usecase.execute(requestValue: SearchBookUseCaseRequestValue(query: word)) { result in
+//            switch result {
+//            case .success(let data):
+//                print(data)
+//
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//            }
+//        }
     }
 }
 

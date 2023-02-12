@@ -29,6 +29,8 @@
 		76F6691529978B8600198F6B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691429978B8600198F6B /* EndPoint.swift */; };
 		76F6691729978DE900198F6B /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691629978DE900198F6B /* NetworkProvider.swift */; };
 		76F669192998AD7A00198F6B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F669182998AD7A00198F6B /* NetworkError.swift */; };
+		76F6691C2998C78D00198F6B /* BookListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691B2998C78D00198F6B /* BookListTableViewController.swift */; };
+		76F6691F2998CBB000198F6B /* BookListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691E2998CBB000198F6B /* BookListTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		76F6691429978B8600198F6B /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		76F6691629978DE900198F6B /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		76F669182998AD7A00198F6B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		76F6691B2998C78D00198F6B /* BookListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListTableViewController.swift; sourceTree = "<group>"; };
+		76F6691E2998CBB000198F6B /* BookListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				76F668D0299685E400198F6B /* BookListViewController.swift */,
+				76F6691A2998C76F00198F6B /* BookListTableView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -255,6 +260,23 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		76F6691A2998C76F00198F6B /* BookListTableView */ = {
+			isa = PBXGroup;
+			children = (
+				76F6691B2998C78D00198F6B /* BookListTableViewController.swift */,
+				76F6691D2998CB9C00198F6B /* Cell */,
+			);
+			path = BookListTableView;
+			sourceTree = "<group>";
+		};
+		76F6691D2998CB9C00198F6B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				76F6691E2998CBB000198F6B /* BookListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -340,10 +362,12 @@
 				76F669192998AD7A00198F6B /* NetworkError.swift in Sources */,
 				76F6690A29977CB300198F6B /* SearchBookUseCase.swift in Sources */,
 				76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */,
+				76F6691F2998CBB000198F6B /* BookListTableViewCell.swift in Sources */,
 				76F668D1299685E400198F6B /* BookListViewController.swift in Sources */,
 				76F66911299786D300198F6B /* BookListResponseDTO.swift in Sources */,
 				76F668CD299685E400198F6B /* AppDelegate.swift in Sources */,
 				76F668F72996954000198F6B /* Book.swift in Sources */,
+				76F6691C2998C78D00198F6B /* BookListTableViewController.swift in Sources */,
 				76F6690129976BCE00198F6B /* BookRespositoryInterface.swift in Sources */,
 				76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */,
 				76F6690329976BEA00198F6B /* BookRespository.swift in Sources */,
