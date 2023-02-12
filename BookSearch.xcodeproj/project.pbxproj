@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		76F668CD299685E400198F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CC299685E400198F6B /* AppDelegate.swift */; };
 		76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CE299685E400198F6B /* SceneDelegate.swift */; };
-		76F668D1299685E400198F6B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D0299685E400198F6B /* ViewController.swift */; };
+		76F668D1299685E400198F6B /* BookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D0299685E400198F6B /* BookListViewController.swift */; };
 		76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */; };
 		76F668D9299685E500198F6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76F668D8299685E500198F6B /* Assets.xcassets */; };
 		76F668DC299685E500198F6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76F668DA299685E500198F6B /* LaunchScreen.storyboard */; };
@@ -17,17 +17,41 @@
 		76F668EB2996874C00198F6B /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 76F668EA2996874C00198F6B /* RxCocoa */; };
 		76F668ED2996874C00198F6B /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76F668EC2996874C00198F6B /* RxSwift */; };
 		76F668F02996892C00198F6B /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 76F668EF2996892C00198F6B /* Swinject */; };
+		76F668F72996954000198F6B /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668F62996954000198F6B /* Book.swift */; };
+		76F668FA299761BA00198F6B /* BookListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668F9299761BA00198F6B /* BookListViewModel.swift */; };
+		76F6690129976BCE00198F6B /* BookRespositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6690029976BCE00198F6B /* BookRespositoryInterface.swift */; };
+		76F6690329976BEA00198F6B /* BookRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6690229976BEA00198F6B /* BookRespository.swift */; };
+		76F669072997787400198F6B /* BookListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F669062997787400198F6B /* BookListRequestDTO.swift */; };
+		76F6690A29977CB300198F6B /* SearchBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6690929977CB300198F6B /* SearchBookUseCase.swift */; };
+		76F6690D299783F600198F6B /* BookScenesDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6690C299783F600198F6B /* BookScenesDIContainer.swift */; };
+		76F6690F299785C400198F6B /* APIEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6690E299785C400198F6B /* APIEndPoint.swift */; };
+		76F66911299786D300198F6B /* BookListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F66910299786D300198F6B /* BookListResponseDTO.swift */; };
+		76F6691529978B8600198F6B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691429978B8600198F6B /* EndPoint.swift */; };
+		76F6691729978DE900198F6B /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F6691629978DE900198F6B /* NetworkProvider.swift */; };
+		76F669192998AD7A00198F6B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F669182998AD7A00198F6B /* NetworkError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		76F668C9299685E400198F6B /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F668CC299685E400198F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F668CE299685E400198F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		76F668D0299685E400198F6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		76F668D0299685E400198F6B /* BookListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewController.swift; sourceTree = "<group>"; };
 		76F668D6299685E400198F6B /* BookSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookSearch.xcdatamodel; sourceTree = "<group>"; };
 		76F668D8299685E500198F6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76F668DB299685E500198F6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76F668DD299685E500198F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76F668F62996954000198F6B /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		76F668F9299761BA00198F6B /* BookListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewModel.swift; sourceTree = "<group>"; };
+		76F6690029976BCE00198F6B /* BookRespositoryInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRespositoryInterface.swift; sourceTree = "<group>"; };
+		76F6690229976BEA00198F6B /* BookRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookRespository.swift; sourceTree = "<group>"; };
+		76F669062997787400198F6B /* BookListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListRequestDTO.swift; sourceTree = "<group>"; };
+		76F6690929977CB300198F6B /* SearchBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookUseCase.swift; sourceTree = "<group>"; };
+		76F6690C299783F600198F6B /* BookScenesDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookScenesDIContainer.swift; sourceTree = "<group>"; };
+		76F6690E299785C400198F6B /* APIEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndPoint.swift; sourceTree = "<group>"; };
+		76F66910299786D300198F6B /* BookListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListResponseDTO.swift; sourceTree = "<group>"; };
+		76F6691429978B8600198F6B /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		76F6691629978DE900198F6B /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		76F669182998AD7A00198F6B /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +89,9 @@
 			isa = PBXGroup;
 			children = (
 				76F668E4299686BB00198F6B /* Application */,
+				76F668FC29976B0100198F6B /* Data */,
+				76F668F42996939500198F6B /* Domain */,
+				76F6691229978B4000198F6B /* Infrastructure */,
 				76F668E5299686CD00198F6B /* Presentation */,
 				76F668E3299686A700198F6B /* Resource */,
 			);
@@ -87,6 +114,7 @@
 			children = (
 				76F668CC299685E400198F6B /* AppDelegate.swift */,
 				76F668CE299685E400198F6B /* SceneDelegate.swift */,
+				76F6690B299783D300198F6B /* DIContainer */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -94,9 +122,137 @@
 		76F668E5299686CD00198F6B /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				76F668D0299685E400198F6B /* ViewController.swift */,
+				76F668F12996922300198F6B /* BookScene */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		76F668F12996922300198F6B /* BookScene */ = {
+			isa = PBXGroup;
+			children = (
+				76F668F22996925800198F6B /* BookList */,
+			);
+			path = BookScene;
+			sourceTree = "<group>";
+		};
+		76F668F22996925800198F6B /* BookList */ = {
+			isa = PBXGroup;
+			children = (
+				76F668F32996926000198F6B /* View */,
+				76F668F82997619D00198F6B /* ViewModel */,
+			);
+			path = BookList;
+			sourceTree = "<group>";
+		};
+		76F668F32996926000198F6B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				76F668D0299685E400198F6B /* BookListViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		76F668F42996939500198F6B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				76F668F5299693FC00198F6B /* Entity */,
+				76F668FF29976B9500198F6B /* Interface */,
+				76F6690829977C7200198F6B /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		76F668F5299693FC00198F6B /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				76F668F62996954000198F6B /* Book.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		76F668F82997619D00198F6B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				76F668F9299761BA00198F6B /* BookListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		76F668FC29976B0100198F6B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				76F668FE29976B5400198F6B /* Network */,
+				76F668FD29976B4700198F6B /* Respository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		76F668FD29976B4700198F6B /* Respository */ = {
+			isa = PBXGroup;
+			children = (
+				76F6690229976BEA00198F6B /* BookRespository.swift */,
+			);
+			path = Respository;
+			sourceTree = "<group>";
+		};
+		76F668FE29976B5400198F6B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				76F6690E299785C400198F6B /* APIEndPoint.swift */,
+				76F66904299777FC00198F6B /* DTO */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		76F668FF29976B9500198F6B /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				76F6690029976BCE00198F6B /* BookRespositoryInterface.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		76F66904299777FC00198F6B /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				76F669062997787400198F6B /* BookListRequestDTO.swift */,
+				76F66910299786D300198F6B /* BookListResponseDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		76F6690829977C7200198F6B /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				76F6690929977CB300198F6B /* SearchBookUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		76F6690B299783D300198F6B /* DIContainer */ = {
+			isa = PBXGroup;
+			children = (
+				76F6690C299783F600198F6B /* BookScenesDIContainer.swift */,
+			);
+			path = DIContainer;
+			sourceTree = "<group>";
+		};
+		76F6691229978B4000198F6B /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				76F6691329978B7C00198F6B /* Network */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		76F6691329978B7C00198F6B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				76F6691429978B8600198F6B /* EndPoint.swift */,
+				76F6691629978DE900198F6B /* NetworkProvider.swift */,
+				76F669182998AD7A00198F6B /* NetworkError.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,10 +336,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F6690D299783F600198F6B /* BookScenesDIContainer.swift in Sources */,
+				76F669192998AD7A00198F6B /* NetworkError.swift in Sources */,
+				76F6690A29977CB300198F6B /* SearchBookUseCase.swift in Sources */,
 				76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */,
-				76F668D1299685E400198F6B /* ViewController.swift in Sources */,
+				76F668D1299685E400198F6B /* BookListViewController.swift in Sources */,
+				76F66911299786D300198F6B /* BookListResponseDTO.swift in Sources */,
 				76F668CD299685E400198F6B /* AppDelegate.swift in Sources */,
+				76F668F72996954000198F6B /* Book.swift in Sources */,
+				76F6690129976BCE00198F6B /* BookRespositoryInterface.swift in Sources */,
 				76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */,
+				76F6690329976BEA00198F6B /* BookRespository.swift in Sources */,
+				76F668FA299761BA00198F6B /* BookListViewModel.swift in Sources */,
+				76F669072997787400198F6B /* BookListRequestDTO.swift in Sources */,
+				76F6691529978B8600198F6B /* EndPoint.swift in Sources */,
+				76F6690F299785C400198F6B /* APIEndPoint.swift in Sources */,
+				76F6691729978DE900198F6B /* NetworkProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,7 +492,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9MW78T4QB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BookSearch/Info.plist;
+				INFOPLIST_FILE = BookSearch/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -351,7 +519,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P9MW78T4QB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BookSearch/Info.plist;
+				INFOPLIST_FILE = BookSearch/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
