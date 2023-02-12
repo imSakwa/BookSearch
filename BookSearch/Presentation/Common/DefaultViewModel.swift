@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol DefaultViewModel {
+    associatedtype Input
+    associatedtype Output
+    
+    func transform(input: Input) -> Output
+}

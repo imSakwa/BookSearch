@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxCocoa
+import RxSwift
 import SnapKit
 
 final class BookListViewController: UIViewController {
@@ -20,7 +22,10 @@ final class BookListViewController: UIViewController {
     }()
     
     private lazy var tableViewVC: BookListTableViewController = {
-        let vc = BookListTableViewController(viewModel: BookListViewModel())
+        let repository = BookRespository()
+        let usecase = SearchBookUseCase(bookRepository: repository)
+        let viewModel = BookListViewModel(useCase: usecase)
+        let vc = BookListTableViewController(viewModel: viewModel)
         return vc
     }()
     
@@ -29,6 +34,12 @@ final class BookListViewController: UIViewController {
        
         setupView()
         setupViewLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        bind()
     }
     
     init(viewModel: BookListViewModel) {
@@ -40,6 +51,15 @@ final class BookListViewController: UIViewController {
 }
 
 extension BookListViewController {
+    private func bind() {
+        let input = BookListViewModel.Input(
+            searchWord: searchBar.rx.text.orEmpty.asDriver()
+        )
+        
+        let output = viewModel.transform(input: input)
+        
+    }
+    
     private func setupView() {
         view.backgroundColor = .white
         navigationItem.titleView = searchBar
@@ -54,18 +74,6 @@ extension BookListViewController {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
         }
-    }
-    
-    private func executeSearch(word: String) {
-//        usecase.execute(requestValue: SearchBookUseCaseRequestValue(query: word)) { result in
-//            switch result {
-//            case .success(let data):
-//                print(data)
-//
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
     }
 }
 

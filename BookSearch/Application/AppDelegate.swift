@@ -15,8 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let container: Container = {
         let container = Container()
-        container.register(BookListViewModel.self) { _ in
-            return BookListViewModel()
+        container.register(BookRespository.self) { _ in
+            return BookRespository()
+        }
+        container.register(SearchBookUseCase.self) { resolver in
+            let respository = resolver.resolve(BookRespository.self)!
+            return SearchBookUseCase(bookRepository: respository)
+        }
+        container.register(BookListViewModel.self) { resolver in
+            let usecase = resolver.resolve(SearchBookUseCase.self)!
+            return BookListViewModel(useCase: usecase)
         }
         container.register(BookListViewController.self) { resolver in
             let viewModel = resolver.resolve(BookListViewModel.self)!
