@@ -16,12 +16,14 @@ final class BookListViewModel: DefaultViewModel {
     }
     
     struct Output {
-//        let bookList: Driver</
+        let bookList: PublishRelay<[Book]>
     }
     
-    private var booksPage = [BooksPage]()
+    private var bookList = PublishRelay<[Book]>()
     private let disposebag = DisposeBag()
     private let useCase: SearchBookUseCase
+    private var totalPage: Int = 0
+    private var currentPage: Int = 0
     
     
     init(useCase: SearchBookUseCase) {
@@ -38,7 +40,10 @@ extension BookListViewModel {
                 self?.useCase.execute(requestValue: requestValue) { [weak self] result in
                     switch result {
                     case .success(let booksPage):
-                        self?.booksPage = booksPage
+                        self?.currentPage = booksPage.start
+                        self?.totalPage = booksPage.total
+                        self?.bookList.accept(booksPage.books)
+                        
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
@@ -46,6 +51,6 @@ extension BookListViewModel {
             })
             .disposed(by: disposebag)
         
-        return Output()
+        return Output(bookList: bookList)
     }
 }

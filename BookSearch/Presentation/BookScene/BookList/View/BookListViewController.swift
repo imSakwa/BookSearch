@@ -14,6 +14,7 @@ import SnapKit
 final class BookListViewController: UIViewController {
     
     private let viewModel: BookListViewModel
+    private let disposebag = DisposeBag()
     
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar(frame: .zero)
@@ -57,7 +58,16 @@ extension BookListViewController {
         )
         
         let output = viewModel.transform(input: input)
-        
+
+        output.bookList
+            .bind(
+                to: tableViewVC.tableView.rx.items(
+                    cellIdentifier: BookListTableViewCell.identifier,
+                    cellType: BookListTableViewCell.self
+                )
+            ) {  index, bookData, cell in
+                cell.setupView(book: bookData)
+            }.disposed(by: disposebag)
     }
     
     private func setupView() {
