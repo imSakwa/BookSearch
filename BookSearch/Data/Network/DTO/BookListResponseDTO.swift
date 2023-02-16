@@ -10,6 +10,7 @@ import Foundation
 struct BookDTO: Codable {
     let title: String
     let description: String
+    let imageStr: String
     let link: String
     let author: String
     let publisher: String
@@ -18,6 +19,7 @@ struct BookDTO: Codable {
     
     enum CodingKeys: String, CodingKey {
         case title, description, link, author, publisher, discount
+        case imageStr = "image"
         case publishDate = "pubdate"
     }
 }
@@ -49,6 +51,7 @@ extension BookDTO {
         return Book(
             title: title,
             description: description,
+            imageStr: imageStr,
             link: link,
             author: author,
             publisher: publisher,

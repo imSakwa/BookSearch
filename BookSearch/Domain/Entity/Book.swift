@@ -10,6 +10,7 @@ import Foundation
 struct Book: Codable {
     let title: String
     let description: String
+    let imageStr: String
     let link: String
     let author: String
     let publisher: String
