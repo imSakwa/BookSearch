@@ -56,7 +56,8 @@ final class BookListViewController: UIViewController {
 extension BookListViewController {
     private func bind() {
         let input = BookListViewModel.Input(
-            searchWord: searchBar.rx.text.orEmpty.asDriver()
+            searchWord: searchBar.rx.text.orEmpty.asDriver(),
+            endEdit: searchBar.searchTextField.rx.controlEvent(.editingDidEndOnExit).asDriver()
         )
         
         let output = viewModel.transform(input: input)

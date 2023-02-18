@@ -13,12 +13,14 @@ import RxSwift
 final class BookListViewModel: DefaultViewModel {
     struct Input {
         let searchWord: Driver<String>
+        let endEdit: Driver<Void>
     }
     
     struct Output {
         let bookList: PublishRelay<[Book]>
     }
     
+    private var searchWord: String = ""
     private var bookList = PublishRelay<[Book]>()
     private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
@@ -36,8 +38,14 @@ extension BookListViewModel {
     func transform(input: Input) -> Output {
         input.searchWord
             .drive(onNext: { [weak self] value in
-                let requestValue = SearchBookUseCaseRequestValue(query: value)
-                
+                self?.searchWord = value
+            })
+            .disposed(by: disposebag)
+        
+        input.endEdit
+            .drive(onNext: { [weak self] _ in
+                let requestValue = SearchBookUseCaseRequestValue(query: self!.searchWord)
+
                 self?.useCase.execute(requestValue: requestValue) { [weak self] result in
                     switch result {
                     case .success(let booksPage):
@@ -47,8 +55,8 @@ extension BookListViewModel {
                         self?.booksPage = (self?.booksPage
                             .filter { $0.start != booksPage.start } ?? [])
                             + [booksPage]
-                        
-                        
+
+
                     case .failure(let error):
                         print(error.localizedDescription)
                     }
