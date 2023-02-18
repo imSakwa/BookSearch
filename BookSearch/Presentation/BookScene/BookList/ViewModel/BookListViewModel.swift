@@ -20,6 +20,7 @@ final class BookListViewModel: DefaultViewModel {
     }
     
     private var bookList = PublishRelay<[Book]>()
+    private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
     private let useCase: SearchBookUseCase
     private var totalPage: Int = 0
@@ -43,6 +44,10 @@ extension BookListViewModel {
                         self?.currentPage = booksPage.start
                         self?.totalPage = booksPage.total
                         self?.bookList.accept(booksPage.books)
+                        self?.booksPage = (self?.booksPage
+                            .filter { $0.start != booksPage.start } ?? [])
+                            + [booksPage]
+                        
                         
                     case .failure(let error):
                         print(error.localizedDescription)
@@ -52,5 +57,9 @@ extension BookListViewModel {
             .disposed(by: disposebag)
         
         return Output(bookList: bookList)
+    }
+    
+    func getBookInfo(index: Int) -> Book {
+        return (booksPage.flatMap { $0.books })[index]
     }
 }

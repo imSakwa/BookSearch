@@ -30,6 +30,14 @@ final class BookListViewController: UIViewController {
         return vc
     }()
     
+    // MARK: - LifeCycle
+    init(viewModel: BookListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) { fatalError() }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -42,15 +50,9 @@ final class BookListViewController: UIViewController {
         
         bind()
     }
-    
-    init(viewModel: BookListViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) { fatalError() }
 }
 
+// MARK: - Function
 extension BookListViewController {
     private func bind() {
         let input = BookListViewModel.Input(
@@ -68,6 +70,22 @@ extension BookListViewController {
             ) {  index, bookData, cell in
                 cell.setupView(book: bookData)
             }.disposed(by: disposebag)
+        
+        tableViewVC.tableView
+            .rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self = self else { return }
+                let bookInfo = self.viewModel.getBookInfo(index: indexPath.row)
+                self.presentToBookDetail(bookInfo: bookInfo)
+            })
+            .disposed(by: disposebag)
+    }
+    
+    private func presentToBookDetail(bookInfo: Book) {
+        let bookDetailViewModel = BookDetailViewModel(book: bookInfo)
+        let bookDetailVC = BookDetailViewController(viewModel: bookDetailViewModel)
+        
+        navigationController?.pushViewController(bookDetailVC, animated: true)
     }
     
     private func setupView() {
