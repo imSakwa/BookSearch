@@ -15,6 +15,7 @@ final class BookListTableViewCell: UITableViewCell {
     
     private lazy var bookImage: UIImageView = {
         let imageView = UIImageView(frame: .zero)
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -86,6 +87,7 @@ extension BookListTableViewCell {
             $0.leading.equalToSuperview().inset(16)
             $0.top.bottom.equalToSuperview().inset(12)
             $0.width.equalTo(90)
+            $0.height.equalTo(170)
         }
         
         bookTitle.snp.makeConstraints {
@@ -114,5 +116,11 @@ extension BookListTableViewCell {
             $0.top.equalTo(bookPublisher.snp.bottom).offset(12)
             $0.bottom.equalToSuperview().inset(16).priority(.low)
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        bookImage.image = nil
     }
 }
