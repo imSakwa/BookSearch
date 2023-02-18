@@ -31,7 +31,8 @@ final class BookDetailViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = .boldSystemFont(ofSize: 18)
+        label.lineBreakMode = .byWordWrapping
+        label.font = .boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -44,19 +45,19 @@ final class BookDetailViewController: UIViewController {
     
     private lazy var bookAuthorAndPublisherLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.font = .systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
     private lazy var bookPubDateLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .systemFont(ofSize: 14)
+        label.font = .systemFont(ofSize: 16)
         return label
     }()
     
     private lazy var bookDiscountLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .boldSystemFont(ofSize: 15)
+        label.font = .boldSystemFont(ofSize: 18)
         return label
     }()
         
@@ -133,12 +134,12 @@ extension BookDetailViewController {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(bookImageView.snp.bottom).offset(12)
             $0.height.greaterThanOrEqualTo(18)
-            $0.height.lessThanOrEqualTo(24)
-            $0.leading.trailing.greaterThanOrEqualToSuperview().inset(36)
+            $0.height.lessThanOrEqualTo(50)
+            $0.leading.trailing.greaterThanOrEqualToSuperview().inset(50)
         }
         
         bookAuthorAndPublisherLabel.snp.makeConstraints {
-            $0.top.equalTo(bookTitleLabel.snp.bottom).offset(4)
+            $0.top.equalTo(bookTitleLabel.snp.bottom).offset(8)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(18)
         }
