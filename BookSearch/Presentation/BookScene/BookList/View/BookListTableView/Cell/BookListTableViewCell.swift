@@ -26,22 +26,21 @@ final class BookListTableViewCell: UITableViewCell {
     
     private lazy var bookAuthor: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 14, weight: .medium)
         return label
     }()
     
     private lazy var bookPublisher: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 13, weight: .medium)
         return label
     }()
     
     private lazy var bookPubDate: UILabel = {
         let label = UILabel(frame: .zero)
-        label.font = .systemFont(ofSize: 12)
+        label.font = .systemFont(ofSize: 13, weight: .medium)
         return label
     }()
-    
     
     private lazy var bookDescription: UILabel = {
         let label = UILabel(frame: .zero)
@@ -74,7 +73,7 @@ extension BookListTableViewCell {
         bookTitle.text = book.title
         bookAuthor.text = book.author
         bookPublisher.text = book.publisher
-        bookPubDate.text = book.publishDate
+        bookPubDate.adjustDateformat(dateStr: book.publishDate)
         bookDescription.text = book.description
     }
     
@@ -102,17 +101,17 @@ extension BookListTableViewCell {
         
         bookPublisher.snp.makeConstraints {
             $0.leading.equalTo(bookTitle)
-            $0.top.equalTo(bookAuthor.snp.bottom).offset(8)
+            $0.top.equalTo(bookAuthor.snp.bottom).offset(4)
         }
         
         bookPubDate.snp.makeConstraints {
-            $0.leading.equalTo(bookPublisher.snp.trailing).offset(8)
+            $0.leading.equalTo(bookPublisher.snp.trailing).offset(4)
             $0.centerY.equalTo(bookPublisher)
         }
         
         bookDescription.snp.makeConstraints {
             $0.leading.trailing.equalTo(bookTitle)
-            $0.top.equalTo(bookPublisher.snp.bottom).offset(8)
+            $0.top.equalTo(bookPublisher.snp.bottom).offset(12)
             $0.bottom.equalToSuperview().inset(16).priority(.low)
         }
     }
