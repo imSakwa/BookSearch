@@ -85,7 +85,7 @@ extension BookListTableViewCell {
         
         bookImage.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
-            $0.top.bottom.equalToSuperview().inset(12)
+            $0.centerY.equalToSuperview()
             $0.width.equalTo(90)
             $0.height.equalTo(170)
         }

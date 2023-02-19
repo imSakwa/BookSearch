@@ -17,11 +17,12 @@ final class BookListViewModel: DefaultViewModel {
     }
     
     struct Output {
-        let bookList: PublishRelay<[Book]>
+        let bookList: BehaviorRelay<[Book]>
     }
     
+    
     private var searchWord: String = ""
-    private var bookList = PublishRelay<[Book]>()
+    private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
     private let useCase: SearchBookUseCase

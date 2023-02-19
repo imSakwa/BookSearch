@@ -35,7 +35,7 @@ final class BookListViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+        
     required init?(coder: NSCoder) { fatalError() }
     
     override func viewDidLoad() {
@@ -43,11 +43,6 @@ final class BookListViewController: UIViewController {
        
         setupView()
         setupViewLayout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         bind()
     }
 }
@@ -55,6 +50,9 @@ final class BookListViewController: UIViewController {
 // MARK: - Function
 extension BookListViewController {
     private func bind() {
+        tableViewVC.tableView.delegate = nil
+        tableViewVC.tableView.dataSource = nil
+        
         let input = BookListViewModel.Input(
             searchWord: searchBar.rx.text.orEmpty.asDriver(),
             endEdit: searchBar.searchTextField.rx.controlEvent(.editingDidEndOnExit).asDriver()
