@@ -8,6 +8,7 @@
 import Foundation
 
 final class BookRespository: BookRespositoryInterface {
+    /// BookList fetch 메서드
     func fetchBookList(
         query: String,
         display: Int,

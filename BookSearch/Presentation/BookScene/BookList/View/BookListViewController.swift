@@ -13,9 +13,11 @@ import SnapKit
 
 final class BookListViewController: UIViewController {
     
+    // MARK: Property
     private let viewModel: BookListViewModel
     private let disposebag = DisposeBag()
     
+    // MARK: UI Component
     private lazy var searchBar: UISearchBar = {
         let bar = UISearchBar(frame: .zero)
         bar.placeholder = "검색어를 입력해주세요."
@@ -49,6 +51,7 @@ final class BookListViewController: UIViewController {
 
 // MARK: - Function
 extension BookListViewController {
+    /// BookListViewModel과 바인딩
     private func bind() {
         tableViewVC.tableView.delegate = nil
         tableViewVC.tableView.dataSource = nil
@@ -84,6 +87,7 @@ extension BookListViewController {
             .disposed(by: disposebag)
     }
     
+    /// Book 모델을 가져와 BookDetailVC로 이동
     private func presentToBookDetail(bookInfo: Book) {
         let bookDetailViewModel = BookDetailViewModel(book: bookInfo)
         let bookDetailVC = BookDetailViewController(viewModel: bookDetailViewModel)
@@ -91,11 +95,13 @@ extension BookListViewController {
         navigationController?.pushViewController(bookDetailVC, animated: true)
     }
     
+    /// View 초기 세팅
     private func setupView() {
         view.backgroundColor = .white
         navigationItem.titleView = searchBar
     }
     
+    /// View 레이아웃 세팅
     private func setupViewLayout() {
         addChild(tableViewVC)
         view.addSubview(tableViewVC.tableView)

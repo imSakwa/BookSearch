@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 final class BookListViewModel: DefaultViewModel {
+    // MARK: Input/Output
     struct Input {
         let searchWord: Driver<String>
         let endEdit: Driver<Void>
@@ -20,7 +21,7 @@ final class BookListViewModel: DefaultViewModel {
         let bookList: BehaviorRelay<[Book]>
     }
     
-    
+    // MARK: Property
     private var searchWord: String = ""
     private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
@@ -32,6 +33,7 @@ final class BookListViewModel: DefaultViewModel {
     private var nextPage: Int { hasMorePage ? currentPage + 10 : currentPage }
     
     
+    // MARK: Init
     init(useCase: SearchBookUseCase) {
         self.useCase = useCase
     }
@@ -54,6 +56,7 @@ extension BookListViewModel {
         return Output(bookList: bookList)
     }
     
+    /// 검색어를 통해 검색 API 요청
     func load() {
         let requestValue = SearchBookUseCaseRequestValue(query: searchWord, start: nextPage)
         useCase.execute(requestValue: requestValue) { [weak self] result in
@@ -84,9 +87,11 @@ extension BookListViewModel {
         booksPage.removeAll()
     }
     
+    /// 해당 index의 Book 모델 리턴
     func getBookInfo(index: Int) -> Book {
         return (booksPage.flatMap { $0.books })[index]
     }
     
+    /// Book 배열을 담고있는 BehaviorRelay 갯수 리턴
     func getBookListCount() -> Int { return bookList.value.count }
 }

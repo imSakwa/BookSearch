@@ -11,8 +11,10 @@ import RxSwift
 import SnapKit
 
 final class BookListTableViewController: UITableViewController {
+    // MARK: Property
     private let viewModel: BookListViewModel
         
+    // MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
