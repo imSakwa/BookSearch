@@ -60,7 +60,11 @@ extension BookListViewModel {
     
     /// 검색어를 통해 검색 API 요청
     func load() {
-        let requestValue = SearchBookUseCaseRequestValue(query: searchWord, start: nextPage)
+        let requestValue = SearchBookUseCaseRequestValue(
+            query: searchWord,
+            start: nextPage,
+            display: displayNum
+        )
         useCase.execute(requestValue: requestValue) { [weak self] result in
             guard let self = self else { return }
             
@@ -75,7 +79,7 @@ extension BookListViewModel {
                     }
                     + [booksPage]
 
-                self.bookList.accept(self.booksPage.flatMap { $0.books }.map { Book(title: $0.title, description: $0.description, imageStr: $0.imageStr, link: $0.link, author: $0.author, publisher: $0.publisher, publishDate: $0.publishDate, discount: $0.discount)})
+                self.bookList.accept(self.booksPage.flatMap { $0.books }.map(Book.init))
                 
             case .failure(let error):
                 print(error.localizedDescription)
