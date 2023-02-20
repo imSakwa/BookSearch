@@ -67,6 +67,10 @@ extension BookListViewController {
                     cellType: BookListTableViewCell.self
                 )
             ) {  index, bookData, cell in
+                if index == self.viewModel.getBookListCount() - 1 {
+                    self.viewModel.load()
+                }
+                
                 cell.setupView(book: bookData)
             }.disposed(by: disposebag)
         

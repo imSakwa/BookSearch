@@ -37,7 +37,14 @@ final class SearchBookUseCase: SearchBookUseCaseProtocol {
 
 struct SearchBookUseCaseRequestValue {
     let query: String
-    let display: Int = 10
-    let start: Int = 1
-    let sort: BookSort = .sim
+    let display: Int
+    let start: Int
+    let sort: BookSort
+    
+    init(query: String, start: Int = 1, display: Int = 10, sort: BookSort = .sim) {
+        self.query = query
+        self.display = display
+        self.start = start
+        self.sort = sort
+    }
 }
