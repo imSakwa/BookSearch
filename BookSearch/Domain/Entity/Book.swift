@@ -16,16 +16,18 @@ struct Book: Codable {
     let publisher: String
     let publishDate: String
     let discount: String
-    
-    init(title: String, description: String, imageStr: String, link: String, author: String, publisher: String, publishDate: String, discount: String) {
-        self.title = title
-        self.description = description
-        self.imageStr = imageStr
-        self.link = link
-        self.author = author
-        self.publisher = publisher
-        self.publishDate = publishDate
-        self.discount = discount
+}
+
+extension Book {
+    init(book: Book) {
+        title = book.title
+        description = book.description
+        imageStr = book.imageStr
+        link = book.link
+        author = book.author
+        publisher = book.publisher
+        publishDate = book.publishDate
+        discount = book.discount
     }
 }
 

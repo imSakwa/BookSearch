@@ -30,8 +30,9 @@ final class BookListViewModel: DefaultViewModel {
     private var totalPage: Int = 0
     private var currentPage: Int = 1
     private var hasMorePage: Bool { currentPage < totalPage }
-    private var nextPage: Int { hasMorePage ? currentPage + 10 : currentPage }
-    
+    private let displayNum: Int = 10
+    // display 요청 파라미터가 10이여서 + 10 해줌 -> start 파라미터는 단순 검색 시작 위치
+    private var nextPage: Int { hasMorePage ? currentPage + displayNum : currentPage }
     
     // MARK: Init
     init(useCase: SearchBookUseCase) {
@@ -40,6 +41,7 @@ final class BookListViewModel: DefaultViewModel {
 }
 
 extension BookListViewModel {
+    // MARK: Input -> Output
     func transform(input: Input) -> Output {
         input.searchWord
             .drive(onNext: { [weak self] value in
