@@ -75,28 +75,20 @@ extension BookListViewController {
                 
                 cell.setupView(book: bookData)
             }.disposed(by: disposebag)
-        
+                
         tableViewVC.tableView
-            .rx.itemSelected
-            .subscribe(onNext: { [weak self] indexPath in
-                guard let self = self else { return }
-                let bookInfo = self.viewModel.getBookInfo(index: indexPath.row)
-                self.presentToBookDetail(bookInfo: bookInfo)
+            .rx.modelSelected(Book.self)
+            .subscribe(onNext: { [weak self] book in
+                let bookDetailViewModel = BookDetailViewModel(book: book)
+                let bookDetailVC = BookDetailViewController(viewModel: bookDetailViewModel)
+                self?.navigationController?.pushViewController(bookDetailVC, animated: true)
             })
             .disposed(by: disposebag)
     }
     
-    /// Book 모델을 가져와 BookDetailVC로 이동
-    private func presentToBookDetail(bookInfo: Book) {
-        let bookDetailViewModel = BookDetailViewModel(book: bookInfo)
-        let bookDetailVC = BookDetailViewController(viewModel: bookDetailViewModel)
-        
-        navigationController?.pushViewController(bookDetailVC, animated: true)
-    }
-    
     /// View 초기 세팅
     private func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         navigationItem.titleView = searchBar
     }
     
