@@ -14,7 +14,6 @@ final class BookListViewModel: DefaultViewModel {
     // MARK: Input/Output
     struct Input {
         let searchWord: Driver<String>
-        let endEdit: Driver<Void>
     }
     
     struct Output {
@@ -22,7 +21,7 @@ final class BookListViewModel: DefaultViewModel {
     }
     
     // MARK: Property
-    private var searchWord: String = ""
+    private var searchWord = BehaviorRelay<String>(value: "")
     private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
@@ -44,13 +43,10 @@ extension BookListViewModel {
     // MARK: Input -> Output
     func transform(input: Input) -> Output {
         input.searchWord
+            .debounce(.milliseconds(300))
+            .distinctUntilChanged()
             .drive(onNext: { [weak self] value in
-                self?.searchWord = value
-            })
-            .disposed(by: disposebag)
-        
-        input.endEdit
-            .drive(onNext: { [weak self] _ in
+                self?.searchWord.accept(value)
                 self?.load()
             })
             .disposed(by: disposebag)
@@ -61,7 +57,7 @@ extension BookListViewModel {
     /// 검색어를 통해 검색 API 요청
     func load() {
         let requestValue = SearchBookUseCaseRequestValue(
-            query: searchWord,
+            query: searchWord.value,
             start: nextPage,
             display: displayNum
         )

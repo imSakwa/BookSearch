@@ -57,8 +57,7 @@ extension BookListViewController {
         tableViewVC.tableView.dataSource = nil
         
         let input = BookListViewModel.Input(
-            searchWord: searchBar.rx.text.orEmpty.asDriver(),
-            endEdit: searchBar.searchTextField.rx.controlEvent(.editingDidEndOnExit).asDriver()
+            searchWord: searchBar.rx.text.orEmpty.asDriver()
         )
         
         let output = viewModel.transform(input: input)
