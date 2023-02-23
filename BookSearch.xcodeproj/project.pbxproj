@@ -13,10 +13,10 @@
 		76D2EF1E29A78B70008E6BB7 /* BooksResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1D29A78B70008E6BB7 /* BooksResponseStorage.swift */; };
 		76D2EF2029A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1F29A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift */; };
 		76D2EF2629A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF2529A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift */; };
+		76D2EF2F29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF2C29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld */; };
 		76F668CD299685E400198F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CC299685E400198F6B /* AppDelegate.swift */; };
 		76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CE299685E400198F6B /* SceneDelegate.swift */; };
 		76F668D1299685E400198F6B /* BookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D0299685E400198F6B /* BookListViewController.swift */; };
-		76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */; };
 		76F668D9299685E500198F6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76F668D8299685E500198F6B /* Assets.xcassets */; };
 		76F668DC299685E500198F6B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76F668DA299685E500198F6B /* LaunchScreen.storyboard */; };
 		76F668E8299686F200198F6B /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 76F668E7299686F200198F6B /* SnapKit */; };
@@ -47,11 +47,12 @@
 		76D2EF1D29A78B70008E6BB7 /* BooksResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksResponseStorage.swift; sourceTree = "<group>"; };
 		76D2EF1F29A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBooksResponseStorage.swift; sourceTree = "<group>"; };
 		76D2EF2529A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookListResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
+		76D2EF2D29A7C6F3008E6BB7 /* BookSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookSearch.xcdatamodel; sourceTree = "<group>"; };
+		76D2EF2E29A7C6F3008E6BB7 /* BookSearch 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BookSearch 2.xcdatamodel"; sourceTree = "<group>"; };
 		76F668C9299685E400198F6B /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F668CC299685E400198F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F668CE299685E400198F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		76F668D0299685E400198F6B /* BookListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListViewController.swift; sourceTree = "<group>"; };
-		76F668D6299685E400198F6B /* BookSearch.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BookSearch.xcdatamodel; sourceTree = "<group>"; };
 		76F668D8299685E500198F6B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76F668DB299685E500198F6B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76F668DD299685E500198F6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,8 +132,8 @@
 		76D2EF1929A67B37008E6BB7 /* CoreDataStorage */ = {
 			isa = PBXGroup;
 			children = (
+				76D2EF2C29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld */,
 				76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */,
-				76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -446,7 +447,6 @@
 				76F669192998AD7A00198F6B /* NetworkError.swift in Sources */,
 				76F6690A29977CB300198F6B /* SearchBookUseCase.swift in Sources */,
 				76D2EF2029A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift in Sources */,
-				76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */,
 				76F6691F2998CBB000198F6B /* BookListTableViewCell.swift in Sources */,
 				76F668D1299685E400198F6B /* BookListViewController.swift in Sources */,
 				76F66911299786D300198F6B /* BookListResponseDTO.swift in Sources */,
@@ -461,6 +461,7 @@
 				76F6690329976BEA00198F6B /* BookRespository.swift in Sources */,
 				76D2EF2629A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift in Sources */,
 				76D2EF12299E8909008E6BB7 /* BookDetailViewModel.swift in Sources */,
+				76D2EF2F29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld in Sources */,
 				76F66925299D2CB100198F6B /* BookDetailViewController.swift in Sources */,
 				76F668FA299761BA00198F6B /* BookListViewModel.swift in Sources */,
 				76D2EF1E29A78B70008E6BB7 /* BooksResponseStorage.swift in Sources */,
@@ -727,12 +728,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */ = {
+		76D2EF2C29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				76F668D6299685E400198F6B /* BookSearch.xcdatamodel */,
+				76D2EF2D29A7C6F3008E6BB7 /* BookSearch.xcdatamodel */,
+				76D2EF2E29A7C6F3008E6BB7 /* BookSearch 2.xcdatamodel */,
 			);
-			currentVersion = 76F668D6299685E400198F6B /* BookSearch.xcdatamodel */;
+			currentVersion = 76D2EF2D29A7C6F3008E6BB7 /* BookSearch.xcdatamodel */;
 			path = BookSearch.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

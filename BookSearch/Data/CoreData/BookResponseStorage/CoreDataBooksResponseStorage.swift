@@ -14,11 +14,6 @@ final class CoreDataBooksResponseStorage {
     init(storage: CoreDataStorage = CoreDataStorage.shared) {
         self.storage = storage
     }
-    
-    private func fetchRequest() {
-        
-    }
-   
 }
 
 extension CoreDataBooksResponseStorage: BooksResponseStorage {
@@ -34,6 +29,29 @@ extension CoreDataBooksResponseStorage: BooksResponseStorage {
                 completion(.success((requestEntity?.response?.toDTO())))
             } catch {
                 completion(.failure(Error.self as! Error))
+            }
+        }
+    }
+    
+    func save(response: BookListResponseDTO, request: BookListRequestDTO) {
+        storage.performBackgroundTask { context in
+            do {
+                let fetchRequest = BookListRequestEntity.fetchRequest()
+                
+                do {
+                    if let result = try context.fetch(fetchRequest).first {
+                        context.delete(result)
+                    }
+                } catch {
+                    print(error)
+                }
+                
+                let requestEntity = request.toDTO(context: context)
+                requestEntity.response = response.toDTO(context: context)
+                
+                try context.save()
+            } catch {
+                print("error")
             }
         }
     }

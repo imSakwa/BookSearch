@@ -9,4 +9,5 @@ import Foundation
 
 protocol BooksResponseStorage {
     func getBookResponse(request: BookListRequestDTO, completion: @escaping (Result<BookListResponseDTO?, Error>) -> Void)
+    func save(response: BookListResponseDTO, request: BookListRequestDTO)
 }

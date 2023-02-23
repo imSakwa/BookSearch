@@ -38,11 +38,13 @@ extension BookRespository {
             
             if case let .success(responseDTO?) = result {
                 cached(responseDTO.toDomain())
+                return
             }
             
             provider.request(with: endpoint) { result in
                 switch result {
                 case .success(let responseDTO):
+                    self.storage.save(response: responseDTO, request: requsetDTO)
                     completion(.success(responseDTO.toDomain()))
                     
                 case .failure(let error):
