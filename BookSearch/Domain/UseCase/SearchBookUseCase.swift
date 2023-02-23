@@ -10,6 +10,7 @@ import Foundation
 protocol SearchBookUseCaseProtocol {
     /// 책 검색 유스케이스
     func execute(requestValue: SearchBookUseCaseRequestValue,
+                 cached: @escaping (BooksPage) -> Void,
                  completion: @escaping (Result<BooksPage, Error>) -> Void)
 }
 
@@ -21,13 +22,15 @@ final class SearchBookUseCase: SearchBookUseCaseProtocol {
     }
     
     func execute(requestValue: SearchBookUseCaseRequestValue,
+                 cached: @escaping (BooksPage) -> Void,
                  completion: @escaping (Result<BooksPage, Error>) -> Void) {
         
         return bookRepository.fetchBookList(
             query: requestValue.query,
             display: requestValue.display,
             start: requestValue.start,
-            sort: requestValue.sort
+            sort: requestValue.sort,
+            cached: cached
         ) { result in
             completion(result)
         }

@@ -14,6 +14,7 @@ protocol BookRespositoryInterface {
         display: Int,
         start: Int,
         sort: BookSort,
+        cached: @escaping (BooksPage) -> Void,
         completion: @escaping (Result<BooksPage, Error>) -> Void
     )
 }

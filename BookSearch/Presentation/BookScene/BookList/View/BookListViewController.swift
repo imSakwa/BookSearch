@@ -25,7 +25,8 @@ final class BookListViewController: UIViewController {
     }()
     
     private lazy var tableViewVC: BookListTableViewController = {
-        let repository = BookRespository()
+        let storage = CoreDataBooksResponseStorage()
+        let repository = BookRespository(storage: storage)
         let usecase = SearchBookUseCase(bookRepository: repository)
         let viewModel = BookListViewModel(useCase: usecase)
         let vc = BookListTableViewController(viewModel: viewModel)

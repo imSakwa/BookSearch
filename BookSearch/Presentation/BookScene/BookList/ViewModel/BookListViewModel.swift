@@ -54,6 +54,18 @@ extension BookListViewModel {
         return Output(bookList: bookList)
     }
     
+    private func appendPage(_ page: BooksPage) {
+        currentPage = page.start
+        totalPage = page.total
+        booksPage = booksPage
+            .filter {
+                $0.start != page.start
+            }
+            + [page]
+
+        bookList.accept(booksPage.flatMap { $0.books }.map(Book.init))
+    }
+    
     /// 검색어를 통해 검색 API 요청
     func load() {
         let requestValue = SearchBookUseCaseRequestValue(
@@ -61,21 +73,15 @@ extension BookListViewModel {
             start: nextPage,
             display: displayNum
         )
-        useCase.execute(requestValue: requestValue) { [weak self] result in
+        useCase.execute(
+            requestValue: requestValue,
+            cached: appendPage
+        ) { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let booksPage):
-                print(booksPage)
-                self.currentPage = booksPage.start
-                self.totalPage = booksPage.total
-                self.booksPage = self.booksPage
-                    .filter {
-                        $0.start != booksPage.start
-                    }
-                    + [booksPage]
-
-                self.bookList.accept(self.booksPage.flatMap { $0.books }.map(Book.init))
+                self.appendPage(booksPage)
                 
             case .failure(let error):
                 print(error.localizedDescription)

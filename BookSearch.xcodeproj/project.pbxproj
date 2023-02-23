@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		76D2EF12299E8909008E6BB7 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF11299E8909008E6BB7 /* BookDetailViewModel.swift */; };
 		76D2EF1629A0BBA5008E6BB7 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1529A0BBA5008E6BB7 /* UILabel+.swift */; };
+		76D2EF1B29A67C1A008E6BB7 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */; };
+		76D2EF1E29A78B70008E6BB7 /* BooksResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1D29A78B70008E6BB7 /* BooksResponseStorage.swift */; };
+		76D2EF2029A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1F29A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift */; };
+		76D2EF2629A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF2529A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift */; };
 		76F668CD299685E400198F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CC299685E400198F6B /* AppDelegate.swift */; };
 		76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CE299685E400198F6B /* SceneDelegate.swift */; };
 		76F668D1299685E400198F6B /* BookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D0299685E400198F6B /* BookListViewController.swift */; };
@@ -39,6 +43,10 @@
 /* Begin PBXFileReference section */
 		76D2EF11299E8909008E6BB7 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		76D2EF1529A0BBA5008E6BB7 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
+		76D2EF1D29A78B70008E6BB7 /* BooksResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooksResponseStorage.swift; sourceTree = "<group>"; };
+		76D2EF1F29A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBooksResponseStorage.swift; sourceTree = "<group>"; };
+		76D2EF2529A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookListResponseEntity+Mapping.swift"; sourceTree = "<group>"; };
 		76F668C9299685E400198F6B /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F668CC299685E400198F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F668CE299685E400198F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +119,34 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		76D2EF1829A67B2A008E6BB7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				76D2EF1C29A78B58008E6BB7 /* BookResponseStorage */,
+				76D2EF1929A67B37008E6BB7 /* CoreDataStorage */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		76D2EF1929A67B37008E6BB7 /* CoreDataStorage */ = {
+			isa = PBXGroup;
+			children = (
+				76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */,
+				76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */,
+			);
+			path = CoreDataStorage;
+			sourceTree = "<group>";
+		};
+		76D2EF1C29A78B58008E6BB7 /* BookResponseStorage */ = {
+			isa = PBXGroup;
+			children = (
+				76D2EF1D29A78B70008E6BB7 /* BooksResponseStorage.swift */,
+				76D2EF1F29A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift */,
+				76D2EF2529A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift */,
+			);
+			path = BookResponseStorage;
+			sourceTree = "<group>";
+		};
 		76F668C0299685E400198F6B = {
 			isa = PBXGroup;
 			children = (
@@ -146,7 +182,6 @@
 				76F668D8299685E500198F6B /* Assets.xcassets */,
 				76F668DA299685E500198F6B /* LaunchScreen.storyboard */,
 				76F668DD299685E500198F6B /* Info.plist */,
-				76F668D5299685E400198F6B /* BookSearch.xcdatamodeld */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -226,6 +261,7 @@
 		76F668FC29976B0100198F6B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				76D2EF1829A67B2A008E6BB7 /* CoreData */,
 				76F668FE29976B5400198F6B /* Network */,
 				76F668FD29976B4700198F6B /* Respository */,
 			);
@@ -409,6 +445,7 @@
 			files = (
 				76F669192998AD7A00198F6B /* NetworkError.swift in Sources */,
 				76F6690A29977CB300198F6B /* SearchBookUseCase.swift in Sources */,
+				76D2EF2029A78F68008E6BB7 /* CoreDataBooksResponseStorage.swift in Sources */,
 				76F668D7299685E400198F6B /* BookSearch.xcdatamodeld in Sources */,
 				76F6691F2998CBB000198F6B /* BookListTableViewCell.swift in Sources */,
 				76F668D1299685E400198F6B /* BookListViewController.swift in Sources */,
@@ -417,13 +454,16 @@
 				76D2EF1629A0BBA5008E6BB7 /* UILabel+.swift in Sources */,
 				76F668F72996954000198F6B /* Book.swift in Sources */,
 				76F669222998D42B00198F6B /* DefaultViewModel.swift in Sources */,
+				76D2EF1B29A67C1A008E6BB7 /* CoreDataStorage.swift in Sources */,
 				76F6691C2998C78D00198F6B /* BookListTableViewController.swift in Sources */,
 				76F6690129976BCE00198F6B /* BookRespositoryInterface.swift in Sources */,
 				76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */,
 				76F6690329976BEA00198F6B /* BookRespository.swift in Sources */,
+				76D2EF2629A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift in Sources */,
 				76D2EF12299E8909008E6BB7 /* BookDetailViewModel.swift in Sources */,
 				76F66925299D2CB100198F6B /* BookDetailViewController.swift in Sources */,
 				76F668FA299761BA00198F6B /* BookListViewModel.swift in Sources */,
+				76D2EF1E29A78B70008E6BB7 /* BooksResponseStorage.swift in Sources */,
 				76F669072997787400198F6B /* BookListRequestDTO.swift in Sources */,
 				76F6691529978B8600198F6B /* EndPoint.swift in Sources */,
 				76F6690F299785C400198F6B /* APIEndPoint.swift in Sources */,

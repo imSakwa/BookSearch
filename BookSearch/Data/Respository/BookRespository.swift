@@ -8,12 +8,22 @@
 import Foundation
 
 final class BookRespository: BookRespositoryInterface {
+    
+    let storage: CoreDataBooksResponseStorage
+    
+    init(storage: CoreDataBooksResponseStorage) {
+        self.storage = storage
+    }
+}
+
+extension BookRespository {
     /// BookList fetch 메서드
     func fetchBookList(
         query: String,
         display: Int,
         start: Int,
         sort: BookSort,
+        cached: @escaping (BooksPage) -> Void,
         completion: @escaping (Result<BooksPage, Error>) -> Void
     ) {
         let requsetDTO = BookListRequestDTO(query: query,
@@ -24,15 +34,21 @@ final class BookRespository: BookRespositoryInterface {
         let endpoint = APIEndPoint.getBookList(with: requsetDTO)
         let provider = NetworkProvider()
         
-        provider.request(with: endpoint) { result in
-            switch result {
-            case .success(let responseDTO):
-                completion(.success(responseDTO.toDomain()))
-                
-            case .failure(let error):
-                completion(.failure(error))
+        storage.getBookResponse(request: requsetDTO) { result in
+            
+            if case let .success(responseDTO?) = result {
+                cached(responseDTO.toDomain())
             }
             
+            provider.request(with: endpoint) { result in
+                switch result {
+                case .success(let responseDTO):
+                    completion(.success(responseDTO.toDomain()))
+                    
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }
     }
 }
