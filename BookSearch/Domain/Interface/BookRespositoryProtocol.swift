@@ -1,5 +1,5 @@
 //
-//  BookRespositoryInterface.swift
+//  BookRespositoryProtocol.swift
 //  BookSearch
 //
 //  Created by ChangMin on 2023/02/11.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol BookRespositoryInterface {
+protocol BookRespositoryProtocol {
     /// 책 리스트 가져오기
     func fetchBookList(
         query: String,
