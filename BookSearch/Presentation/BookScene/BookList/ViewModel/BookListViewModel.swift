@@ -26,7 +26,6 @@ final class BookListViewModel: DefaultViewModel {
     
     // MARK: Property
     private var searchWord = BehaviorRelay<String>(value: "")
-//    private let cancelClick = PublishRelay<Void>()
     private let showQuery = PublishRelay<Bool>()
     private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
@@ -49,16 +48,12 @@ extension BookListViewModel {
     // MARK: Input -> Output
     func transform(input: Input) -> Output {
         input.searchWord
-//            .debounce(.milliseconds(300))
-//            .distinctUntilChanged()
             .drive(onNext: { [weak self] value in
                 guard let value = value, value != "" else {
                     self?.showQuery.accept(true)
-                    print("clear")
                     return
                 }
                 self?.searchWord.accept(value)
-        
             })
             .disposed(by: disposebag)
         
@@ -94,7 +89,6 @@ extension BookListViewModel {
                 $0.start != page.start
             }
             + [page]
-
         bookList.accept(booksPage.flatMap { $0.books }.map(Book.init))
     }
     
@@ -121,6 +115,7 @@ extension BookListViewModel {
         }
     }
     
+    /// 프로퍼티 초기화
     func reset() {
         currentPage = 1
         totalPage = 0
