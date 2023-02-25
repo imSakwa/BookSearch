@@ -81,7 +81,8 @@ extension BookListViewController {
                 self.searchBar.resignFirstResponder()
                 
                 if index == self.viewModel.getBookListCount() - 1 {
-                    self.viewModel.load()
+                    // FIXME: 수정하기
+                    self.viewModel.load(query: BookQuery(query: ""))
                 }
                 
                 cell.setupView(book: bookData)
@@ -89,7 +90,7 @@ extension BookListViewController {
         
         output.showQuery
             .bind(onNext: { [weak self] value in
-                value ? self?.showQueryTableView() : self?.showBookListVC()
+                self?.updateView()
             })
             .disposed(by: disposebag)
                 
@@ -109,6 +110,14 @@ extension BookListViewController {
         navigationItem.titleView = searchBar
     }
     
+    private func updateView() {
+        guard searchBar.isFirstResponder else {
+            showBookListVC()
+            return
+        }
+        showQueryTableView()
+    }
+    
     /// 자식 BookListTableVC 등록
     private func showBookListVC() {
         removeQueryTableVC()
@@ -121,13 +130,6 @@ extension BookListViewController {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
         }
-    }
-    
-    /// 자식 BookListTableVC 해제
-    private func removeBookListVC() {
-        tableViewVC.willMove(toParent: nil)
-        tableViewVC.removeFromParent()
-        tableViewVC.tableView.removeFromSuperview()
     }
     
     /// 자식 QueryTableVC 등록
@@ -143,6 +145,13 @@ extension BookListViewController {
             $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview()
         }
+    }
+    
+    /// 자식 BookListTableVC 해제
+    private func removeBookListVC() {
+        tableViewVC.willMove(toParent: nil)
+        tableViewVC.removeFromParent()
+        tableViewVC.tableView.removeFromSuperview()
     }
     
     /// 자식 QueryTableVC 해제

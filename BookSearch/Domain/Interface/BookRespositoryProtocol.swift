@@ -10,7 +10,7 @@ import Foundation
 protocol BookRespositoryProtocol {
     /// 책 리스트 가져오기
     func fetchBookList(
-        query: String,
+        query: BookQuery,
         display: Int,
         start: Int,
         sort: BookSort,

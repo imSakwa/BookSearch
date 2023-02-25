@@ -7,8 +7,7 @@
 
 import Foundation
 
-final class BookRespository: BookRespositoryInterface {
-    
+final class BookRespository: BookRespositoryProtocol {
     let storage: CoreDataBooksResponseStorage
     
     init(storage: CoreDataBooksResponseStorage) {
@@ -19,14 +18,14 @@ final class BookRespository: BookRespositoryInterface {
 extension BookRespository {
     /// BookList fetch 메서드
     func fetchBookList(
-        query: String,
+        query: BookQuery,
         display: Int,
         start: Int,
         sort: BookSort,
         cached: @escaping (BooksPage) -> Void,
         completion: @escaping (Result<BooksPage, Error>) -> Void
     ) {
-        let requsetDTO = BookListRequestDTO(query: query,
+        let requsetDTO = BookListRequestDTO(query: query.query,
                                             display: display,
                                             start: start,
                                             sort: sort)

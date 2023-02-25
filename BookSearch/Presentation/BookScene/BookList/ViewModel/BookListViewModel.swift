@@ -60,7 +60,7 @@ extension BookListViewModel {
         input.searchClick
             .drive(onNext: { [weak self] _ in
                 self?.showQuery.accept(false)
-                self?.load()
+                self?.load(query: BookQuery(query: (self?.searchWord.value)!))
             })
             .disposed(by: disposebag)
         
@@ -93,12 +93,13 @@ extension BookListViewModel {
     }
     
     /// 검색어를 통해 검색 API 요청
-    func load() {
+    func load(query: BookQuery) {
         let requestValue = SearchBookUseCaseRequestValue(
-            query: searchWord.value,
+            query: query,
             start: nextPage,
             display: displayNum
         )
+        
         useCase.execute(
             requestValue: requestValue,
             cached: appendPage
@@ -115,8 +116,14 @@ extension BookListViewModel {
         }
     }
     
+    /// query로 업데이트
+    private func update(query: BookQuery) {
+        reset()
+        load(query: query)
+    }
+    
     /// 프로퍼티 초기화
-    func reset() {
+    private func reset() {
         currentPage = 1
         totalPage = 0
         booksPage.removeAll()
