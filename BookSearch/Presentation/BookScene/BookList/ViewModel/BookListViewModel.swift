@@ -13,15 +13,21 @@ import RxSwift
 final class BookListViewModel: DefaultViewModel {
     // MARK: Input/Output
     struct Input {
-        let searchWord: Driver<String>
+        let searchWord: Driver<String?>
+        let searchClick: Driver<Void>
+        let editClick: Driver<Void>
+        let cancelClick: Driver<Void>
     }
     
     struct Output {
         let bookList: BehaviorRelay<[Book]>
+        let showQuery: PublishRelay<Bool>
     }
     
     // MARK: Property
     private var searchWord = BehaviorRelay<String>(value: "")
+//    private let cancelClick = PublishRelay<Void>()
+    private let showQuery = PublishRelay<Bool>()
     private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
@@ -43,17 +49,43 @@ extension BookListViewModel {
     // MARK: Input -> Output
     func transform(input: Input) -> Output {
         input.searchWord
-            .debounce(.milliseconds(300))
-            .distinctUntilChanged()
+//            .debounce(.milliseconds(300))
+//            .distinctUntilChanged()
             .drive(onNext: { [weak self] value in
+                guard let value = value, value != "" else {
+                    self?.showQuery.accept(true)
+                    print("clear")
+                    return
+                }
                 self?.searchWord.accept(value)
+        
+            })
+            .disposed(by: disposebag)
+        
+        input.searchClick
+            .drive(onNext: { [weak self] _ in
+                self?.showQuery.accept(false)
                 self?.load()
             })
             .disposed(by: disposebag)
         
-        return Output(bookList: bookList)
+        
+        input.editClick
+            .drive(onNext: { [weak self] _ in
+                self?.showQuery.accept(true)
+            })
+            .disposed(by: disposebag)
+        
+        input.cancelClick
+            .drive(onNext: { [weak self] _ in
+                self?.showQuery.accept(false)
+            })
+            .disposed(by: disposebag)
+        
+        return Output(bookList: bookList, showQuery: showQuery)
     }
     
+    /// 검색 결과 페이지 프로퍼티에 저장
     private func appendPage(_ page: BooksPage) {
         currentPage = page.start
         totalPage = page.total

@@ -33,6 +33,12 @@ final class BookListViewController: UIViewController {
         return vc
     }()
     
+    private lazy var queryTableVC: BookQueryListTableViewController = {
+        let viewModel = BookQueryViewModel()
+        let vc = BookQueryListTableViewController(viewModel: viewModel)
+        return vc
+    }()
+    
     // MARK: - LifeCycle
     init(viewModel: BookListViewModel) {
         self.viewModel = viewModel
@@ -45,7 +51,6 @@ final class BookListViewController: UIViewController {
         super.viewDidLoad()
        
         setupView()
-        setupViewLayout()
         bind()
     }
 }
@@ -58,7 +63,10 @@ extension BookListViewController {
         tableViewVC.tableView.dataSource = nil
         
         let input = BookListViewModel.Input(
-            searchWord: searchBar.rx.text.orEmpty.asDriver()
+            searchWord: searchBar.rx.text.asDriver(onErrorJustReturn: ""),
+            searchClick: searchBar.rx.searchButtonClicked.asDriver(),
+            editClick: searchBar.rx.textDidBeginEditing.asDriver(),
+            cancelClick: searchBar.rx.cancelButtonClicked.asDriver()
         )
         
         let output = viewModel.transform(input: input)
@@ -70,12 +78,20 @@ extension BookListViewController {
                     cellType: BookListTableViewCell.self
                 )
             ) {  index, bookData, cell in
+                self.searchBar.resignFirstResponder()
+                
                 if index == self.viewModel.getBookListCount() - 1 {
                     self.viewModel.load()
                 }
                 
                 cell.setupView(book: bookData)
             }.disposed(by: disposebag)
+        
+        output.showQuery
+            .bind(onNext: { [weak self] value in
+                value ? self?.showQueryTableView() : self?.showBookListVC()
+            })
+            .disposed(by: disposebag)
                 
         tableViewVC.tableView
             .rx.modelSelected(Book.self)
@@ -93,8 +109,10 @@ extension BookListViewController {
         navigationItem.titleView = searchBar
     }
     
-    /// View 레이아웃 세팅
-    private func setupViewLayout() {
+    /// 자식 BookListTableVC 등록
+    private func showBookListVC() {
+        removeQueryTableVC()
+        
         addChild(tableViewVC)
         view.addSubview(tableViewVC.tableView)
         tableViewVC.didMove(toParent: self)
@@ -104,5 +122,35 @@ extension BookListViewController {
             $0.leading.trailing.equalToSuperview()
         }
     }
+    
+    /// 자식 BookListTableVC 해제
+    private func removeBookListVC() {
+        tableViewVC.willMove(toParent: nil)
+        tableViewVC.removeFromParent()
+        tableViewVC.tableView.removeFromSuperview()
+    }
+    
+    /// 자식 QueryTableVC 등록
+    private func showQueryTableView() {
+        removeBookListVC()
+        searchBar.showsCancelButton = true
+        
+        addChild(queryTableVC)
+        view.addSubview(queryTableVC.tableView)
+        queryTableVC.didMove(toParent: self)
+        
+        queryTableVC.tableView.snp.makeConstraints {
+            $0.top.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    /// 자식 QueryTableVC 해제
+    private func removeQueryTableVC() {
+        searchBar.showsCancelButton = false
+        
+        queryTableVC.willMove(toParent: nil)
+        queryTableVC.removeFromParent()
+        queryTableVC.tableView.removeFromSuperview()
+    }
 }
-

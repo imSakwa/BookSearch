@@ -13,9 +13,11 @@ import SnapKit
 
 final class BookDetailViewController: UIViewController {
     
+    // MARK: Property
     private let disposebag = DisposeBag()
     private let bookDetailViewModel: BookDetailViewModel
     
+    // MARK: UI Component
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView(frame: .zero)
         return scrollView
