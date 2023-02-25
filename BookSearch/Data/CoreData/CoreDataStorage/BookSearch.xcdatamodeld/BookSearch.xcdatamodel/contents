@@ -13,6 +13,10 @@
         <relationship name="book" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BookResponseEntity" inverseName="bookResponse" inverseEntity="BookResponseEntity"/>
         <relationship name="request" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BookListRequestEntity" inverseName="response" inverseEntity="BookListRequestEntity"/>
     </entity>
+    <entity name="BookQueryEntity" representedClassName="BookQueryEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="query" attributeType="String"/>
+    </entity>
     <entity name="BookResponseEntity" representedClassName="BookResponseEntity" syncable="YES" codeGenerationType="class">
         <attribute name="author" attributeType="String"/>
         <attribute name="descrip" attributeType="String"/>
