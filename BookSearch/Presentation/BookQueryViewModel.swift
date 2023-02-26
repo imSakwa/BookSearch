@@ -32,8 +32,6 @@ final class BookQueryViewModel: DefaultViewModel {
          fetchFactory: @escaping FetchRecentBookQueryUseCaseFactory) {
         self.fetchMaxCount = fetchMaxCount
         self.fetchFactory = fetchFactory
-        
-        updateQuery()
     }
 }
 

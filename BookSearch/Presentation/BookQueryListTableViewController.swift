@@ -23,6 +23,11 @@ final class BookQueryListTableViewController: UITableViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.updateQuery()
+    }
+    
     init(viewModel: BookQueryViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
