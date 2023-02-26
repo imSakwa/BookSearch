@@ -12,7 +12,7 @@ import SnapKit
 final class BookQueryListTableViewCell: UITableViewCell {
     // MARK: Property
     static let identifier = String(describing: BookQueryListTableViewCell.self)
-    static let height = CGFloat(35)
+    static let height = CGFloat(36)
     
     // MARK: UI Component
     private lazy var titleLabel: UILabel = {
@@ -23,21 +23,26 @@ final class BookQueryListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        setupView()
         setupViewLayout()
     }
     
     required init?(coder: NSCoder) { fatalError() }
 }
 
+// MARK: - Public Func
+extension BookQueryListTableViewCell {
+    func setupView(query: BookQuery) {
+        titleLabel.text = query.query
+    }
+}
+
+// MARK: - Private Func
 extension BookQueryListTableViewCell {
     private func setupViewLayout() {
         contentView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(12)
-            $0.centerY.equalToSuperview()
-            $0.height.equalTo(24)
+            $0.edges.equalToSuperview().inset(12)
         }
     }
 }

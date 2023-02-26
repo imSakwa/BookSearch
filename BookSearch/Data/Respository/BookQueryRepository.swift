@@ -7,11 +7,26 @@
 
 import Foundation
 
-final class BookQueryRepository: BookRespositoryProtocol {
+final class BookQueryRepository: BookQueryRepositoryProtocol {
+    let storage: BookQueryStorage
     
-    let storage: CoreDataBooksResponseStorage
-    
-    init(storage: CoreDataBooksResponseStorage) {
+    init(storage: BookQueryStorage) {
         self.storage = storage
+    }
+}
+
+extension BookQueryRepository {
+    func fetchRecentQueries(
+        maxCount: Int,
+        completion: @escaping (Result<[BookQuery], Error>) -> Void
+    ) {
+        return storage.fetchRecentQueries(maxCount: maxCount, completion: completion)
+    }
+    
+    func saveRecentQuery(
+        query: BookQuery,
+        completion: @escaping (Result<BookQuery, Error>) -> Void
+    ) {
+        return storage.saveRecentQuery(query: query, completion: completion)
     }
 }

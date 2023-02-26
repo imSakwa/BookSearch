@@ -18,6 +18,12 @@
 		76D2EF3629A91672008E6BB7 /* BookQueryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF3529A91672008E6BB7 /* BookQueryViewModel.swift */; };
 		76D2EF3829A91ACB008E6BB7 /* FetchRecentBookUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF3729A91ACB008E6BB7 /* FetchRecentBookUseCase.swift */; };
 		76D2EF3B29A91D3B008E6BB7 /* BookQueryListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF3A29A91D3B008E6BB7 /* BookQueryListTableViewCell.swift */; };
+		76D2EF3D29A9E28E008E6BB7 /* BookQueryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF3C29A9E28E008E6BB7 /* BookQueryRepository.swift */; };
+		76D2EF3F29A9E2DF008E6BB7 /* BookQueryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF3E29A9E2DF008E6BB7 /* BookQueryRepositoryProtocol.swift */; };
+		76D2EF4129A9E3E0008E6BB7 /* BookQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF4029A9E3E0008E6BB7 /* BookQuery.swift */; };
+		76D2EF4429A9E90A008E6BB7 /* BookQueryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF4329A9E90A008E6BB7 /* BookQueryStorage.swift */; };
+		76D2EF4629A9E92E008E6BB7 /* CoreDataBookQueryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF4529A9E92E008E6BB7 /* CoreDataBookQueryStorage.swift */; };
+		76D2EF4829AA0AD7008E6BB7 /* BookQueryEntity+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF4729AA0AD7008E6BB7 /* BookQueryEntity+Mapping.swift */; };
 		76F668CD299685E400198F6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CC299685E400198F6B /* AppDelegate.swift */; };
 		76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668CE299685E400198F6B /* SceneDelegate.swift */; };
 		76F668D1299685E400198F6B /* BookListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F668D0299685E400198F6B /* BookListViewController.swift */; };
@@ -57,6 +63,12 @@
 		76D2EF3529A91672008E6BB7 /* BookQueryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQueryViewModel.swift; sourceTree = "<group>"; };
 		76D2EF3729A91ACB008E6BB7 /* FetchRecentBookUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentBookUseCase.swift; sourceTree = "<group>"; };
 		76D2EF3A29A91D3B008E6BB7 /* BookQueryListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQueryListTableViewCell.swift; sourceTree = "<group>"; };
+		76D2EF3C29A9E28E008E6BB7 /* BookQueryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQueryRepository.swift; sourceTree = "<group>"; };
+		76D2EF3E29A9E2DF008E6BB7 /* BookQueryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQueryRepositoryProtocol.swift; sourceTree = "<group>"; };
+		76D2EF4029A9E3E0008E6BB7 /* BookQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQuery.swift; sourceTree = "<group>"; };
+		76D2EF4329A9E90A008E6BB7 /* BookQueryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookQueryStorage.swift; sourceTree = "<group>"; };
+		76D2EF4529A9E92E008E6BB7 /* CoreDataBookQueryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataBookQueryStorage.swift; sourceTree = "<group>"; };
+		76D2EF4729AA0AD7008E6BB7 /* BookQueryEntity+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookQueryEntity+Mapping.swift"; sourceTree = "<group>"; };
 		76F668C9299685E400198F6B /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76F668CC299685E400198F6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76F668CE299685E400198F6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				76D2EF1C29A78B58008E6BB7 /* BookResponseStorage */,
+				76D2EF4229A9E8E6008E6BB7 /* BookQueryStorage */,
 				76D2EF1929A67B37008E6BB7 /* CoreDataStorage */,
 			);
 			path = CoreData;
@@ -140,8 +153,8 @@
 		76D2EF1929A67B37008E6BB7 /* CoreDataStorage */ = {
 			isa = PBXGroup;
 			children = (
-				76D2EF2C29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld */,
 				76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */,
+				76D2EF2C29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -188,6 +201,16 @@
 				76D2EF3A29A91D3B008E6BB7 /* BookQueryListTableViewCell.swift */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		76D2EF4229A9E8E6008E6BB7 /* BookQueryStorage */ = {
+			isa = PBXGroup;
+			children = (
+				76D2EF4329A9E90A008E6BB7 /* BookQueryStorage.swift */,
+				76D2EF4529A9E92E008E6BB7 /* CoreDataBookQueryStorage.swift */,
+				76D2EF4729AA0AD7008E6BB7 /* BookQueryEntity+Mapping.swift */,
+			);
+			path = BookQueryStorage;
 			sourceTree = "<group>";
 		};
 		76F668C0299685E400198F6B = {
@@ -290,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				76F668F62996954000198F6B /* Book.swift */,
+				76D2EF4029A9E3E0008E6BB7 /* BookQuery.swift */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -316,6 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				76F6690229976BEA00198F6B /* BookRespository.swift */,
+				76D2EF3C29A9E28E008E6BB7 /* BookQueryRepository.swift */,
 			);
 			path = Respository;
 			sourceTree = "<group>";
@@ -333,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				76F6690029976BCE00198F6B /* BookRespositoryProtocol.swift */,
+				76D2EF3E29A9E2DF008E6BB7 /* BookQueryRepositoryProtocol.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -499,14 +525,19 @@
 				76D2EF1629A0BBA5008E6BB7 /* UILabel+.swift in Sources */,
 				76F668F72996954000198F6B /* Book.swift in Sources */,
 				76F669222998D42B00198F6B /* DefaultViewModel.swift in Sources */,
+				76D2EF4129A9E3E0008E6BB7 /* BookQuery.swift in Sources */,
+				76D2EF3D29A9E28E008E6BB7 /* BookQueryRepository.swift in Sources */,
 				76D2EF1B29A67C1A008E6BB7 /* CoreDataStorage.swift in Sources */,
+				76D2EF4829AA0AD7008E6BB7 /* BookQueryEntity+Mapping.swift in Sources */,
 				76F6691C2998C78D00198F6B /* BookListTableViewController.swift in Sources */,
+				76D2EF4429A9E90A008E6BB7 /* BookQueryStorage.swift in Sources */,
 				76F6690129976BCE00198F6B /* BookRespositoryProtocol.swift in Sources */,
 				76F668CF299685E400198F6B /* SceneDelegate.swift in Sources */,
 				76D2EF3629A91672008E6BB7 /* BookQueryViewModel.swift in Sources */,
 				76F6690329976BEA00198F6B /* BookRespository.swift in Sources */,
 				76D2EF3229A91576008E6BB7 /* BookQueryListTableViewController.swift in Sources */,
 				76D2EF2629A7A487008E6BB7 /* BookListResponseEntity+Mapping.swift in Sources */,
+				76D2EF4629A9E92E008E6BB7 /* CoreDataBookQueryStorage.swift in Sources */,
 				76D2EF12299E8909008E6BB7 /* BookDetailViewModel.swift in Sources */,
 				76D2EF2F29A7C6F3008E6BB7 /* BookSearch.xcdatamodeld in Sources */,
 				76F66925299D2CB100198F6B /* BookDetailViewController.swift in Sources */,
@@ -515,6 +546,7 @@
 				76F669072997787400198F6B /* BookListRequestDTO.swift in Sources */,
 				76F6691529978B8600198F6B /* EndPoint.swift in Sources */,
 				76F6690F299785C400198F6B /* APIEndPoint.swift in Sources */,
+				76D2EF3F29A9E2DF008E6BB7 /* BookQueryRepositoryProtocol.swift in Sources */,
 				76D2EF3829A91ACB008E6BB7 /* FetchRecentBookUseCase.swift in Sources */,
 				76F6691729978DE900198F6B /* NetworkProvider.swift in Sources */,
 			);

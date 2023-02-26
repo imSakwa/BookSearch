@@ -16,9 +16,11 @@ protocol SearchBookUseCaseProtocol {
 
 final class SearchBookUseCase: SearchBookUseCaseProtocol {
     private let bookRepository: BookRespository
+    private let bookQueryRepository: BookQueryRepository
 
-    init(bookRepository: BookRespository) {
+    init(bookRepository: BookRespository, bookQueryRepository: BookQueryRepository) {
         self.bookRepository = bookRepository
+        self.bookQueryRepository = bookQueryRepository
     }
     
     func execute(requestValue: SearchBookUseCaseRequestValue,
@@ -32,6 +34,9 @@ final class SearchBookUseCase: SearchBookUseCaseProtocol {
             sort: requestValue.sort,
             cached: cached
         ) { result in
+            if case .success = result {
+                self.bookQueryRepository.saveRecentQuery(query: requestValue.query) { _ in }
+            }
             completion(result)
         }
     }

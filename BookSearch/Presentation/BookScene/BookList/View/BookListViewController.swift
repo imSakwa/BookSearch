@@ -27,14 +27,21 @@ final class BookListViewController: UIViewController {
     private lazy var tableViewVC: BookListTableViewController = {
         let storage = CoreDataBooksResponseStorage()
         let repository = BookRespository(storage: storage)
-        let usecase = SearchBookUseCase(bookRepository: repository)
+        let queryStorage = CoreDataBookQueryStorage()
+        let queryRepository = BookQueryRepository(storage: queryStorage)
+        let usecase = SearchBookUseCase(
+            bookRepository: repository,
+            bookQueryRepository: queryRepository)
         let viewModel = BookListViewModel(useCase: usecase)
         let vc = BookListTableViewController(viewModel: viewModel)
         return vc
     }()
     
     private lazy var queryTableVC: BookQueryListTableViewController = {
-        let viewModel = BookQueryViewModel()
+        let viewModel = BookQueryViewModel(
+            fetchMaxCount: 10,
+            fetchFactory:  makeFetchQueryUseCase
+        )
         let vc = BookQueryListTableViewController(viewModel: viewModel)
         return vc
     }()
@@ -57,6 +64,19 @@ final class BookListViewController: UIViewController {
 
 // MARK: - Function
 extension BookListViewController {
+    func makeFetchQueryUseCase(
+        requestValue: FetchRecentBookQueryUseCase.FetchQueryRequestValue,
+        completion: @escaping (FetchRecentBookQueryUseCase.ResultValue) -> Void
+    ) -> FetchRecentBookQueryUseCase {
+        let queryStorage = CoreDataBookQueryStorage()
+        let queryRepository = BookQueryRepository(storage: queryStorage)
+        
+        return FetchRecentBookQueryUseCase(
+            requestValue: requestValue,
+            repository: queryRepository,
+            completion: completion)
+    }
+    
     /// BookListViewModel과 바인딩
     private func bind() {
         tableViewVC.tableView.delegate = nil
@@ -91,6 +111,7 @@ extension BookListViewController {
         output.showQuery
             .bind(onNext: { [weak self] value in
                 self?.updateView()
+                if !value { self?.searchBar.resignFirstResponder() }
             })
             .disposed(by: disposebag)
                 
@@ -102,6 +123,15 @@ extension BookListViewController {
                 self?.navigationController?.pushViewController(bookDetailVC, animated: true)
             })
             .disposed(by: disposebag)
+        
+        queryTableVC.tableView
+            .rx.modelSelected(BookQuery.self)
+            .subscribe(onNext: { [weak self] query in
+                self?.searchBar.resignFirstResponder()
+                self?.updateView()
+                self?.viewModel.update(query: query)
+            })
+            .disposed(by: disposebag)
     }
     
     /// View 초기 세팅
@@ -110,6 +140,7 @@ extension BookListViewController {
         navigationItem.titleView = searchBar
     }
     
+    /// searchBar focusing 상태에 따라 화면 전환
     private func updateView() {
         guard searchBar.isFirstResponder else {
             showBookListVC()

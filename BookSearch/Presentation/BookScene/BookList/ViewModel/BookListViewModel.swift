@@ -64,7 +64,6 @@ extension BookListViewModel {
             })
             .disposed(by: disposebag)
         
-        
         input.editClick
             .drive(onNext: { [weak self] _ in
                 self?.showQuery.accept(true)
@@ -117,7 +116,7 @@ extension BookListViewModel {
     }
     
     /// query로 업데이트
-    private func update(query: BookQuery) {
+    func update(query: BookQuery) {
         reset()
         load(query: query)
     }

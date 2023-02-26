@@ -22,9 +22,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let booksResponseStorage = resolver.resolve(CoreDataBooksResponseStorage.self)!
             return BookRespository(storage: booksResponseStorage)
         }
+        container.register(CoreDataBookQueryStorage.self) { _ in
+            return CoreDataBookQueryStorage()
+        }
+        container.register(BookQueryRepository.self) { resolver in
+            let bookQueryStorage = resolver.resolve(CoreDataBookQueryStorage.self)!
+            return BookQueryRepository(storage: bookQueryStorage)
+        }
         container.register(SearchBookUseCase.self) { resolver in
             let respository = resolver.resolve(BookRespository.self)!
-            return SearchBookUseCase(bookRepository: respository)
+            let queryRespository = resolver.resolve(BookQueryRepository.self)!
+            return SearchBookUseCase(
+                bookRepository: respository,
+                bookQueryRepository: queryRespository
+            )
         }
         container.register(BookListViewModel.self) { resolver in
             let usecase = resolver.resolve(SearchBookUseCase.self)!
