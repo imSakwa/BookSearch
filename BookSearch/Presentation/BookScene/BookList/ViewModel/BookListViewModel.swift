@@ -126,7 +126,10 @@ extension BookListViewModel {
         currentPage = 1
         totalPage = 0
         booksPage.removeAll()
-        bookList = BehaviorRelay<[Book]>(value: [])
+        
+        var array = bookList.value
+        array.removeAll()
+        bookList.accept(array)
     }
     
     /// 해당 index의 Book 모델 리턴
