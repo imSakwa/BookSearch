@@ -37,7 +37,6 @@ extension BookRespository {
             
             if case let .success(responseDTO?) = result {
                 cached(responseDTO.toDomain())
-                return
             }
             
             provider.request(with: endpoint) { result in
