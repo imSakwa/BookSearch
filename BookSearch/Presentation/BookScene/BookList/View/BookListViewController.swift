@@ -110,8 +110,8 @@ extension BookListViewController {
         
         output.showQuery
             .bind(onNext: { [weak self] value in
-                self?.updateView()
                 if !value { self?.searchBar.resignFirstResponder() }
+                self?.updateView()
             })
             .disposed(by: disposebag)
                 
@@ -129,7 +129,8 @@ extension BookListViewController {
             .subscribe(onNext: { [weak self] query in
                 self?.searchBar.resignFirstResponder()
                 self?.updateView()
-                self?.viewModel.update(query: query)
+                self?.viewModel.search(query: query)
+                self?.searchBar.text = query.query
             })
             .disposed(by: disposebag)
     }
