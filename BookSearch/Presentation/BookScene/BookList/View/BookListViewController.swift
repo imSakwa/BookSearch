@@ -99,14 +99,18 @@ extension BookListViewController {
                 )
             ) {  index, bookData, cell in
                 self.searchBar.resignFirstResponder()
-                
-                if index == self.viewModel.getBookListCount() - 1 {
-                    // FIXME: 수정하기
-                    self.viewModel.load(query: BookQuery(query: ""))
-                }
-                
                 cell.setupView(book: bookData)
             }.disposed(by: disposebag)
+        
+        tableViewVC.tableView.rx.prefetchRows
+            .compactMap(\.last?.row)
+            .withUnretained(self)
+            .bind(onNext: { vc, row in
+                guard row == vc.viewModel.getBookListCount() - 1 else { return }
+                vc.viewModel.prefetchRow(queryStr: vc.searchBar.searchTextField.text!)
+            })
+            .disposed(by: disposebag)
+        
         
         output.showQuery
             .bind(onNext: { [weak self] value in

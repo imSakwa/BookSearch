@@ -38,6 +38,7 @@ final class BookListViewModel: DefaultViewModel {
     // display 요청 파라미터가 10이여서 + 10 해줌 -> start 파라미터는 단순 검색 시작 위치
     private var nextPage: Int { hasMorePage ? currentPage + displayNum : currentPage }
     
+    var isLoading: Bool = false
     // MARK: Init
     init(useCase: SearchBookUseCase) {
         self.useCase = useCase
@@ -92,19 +93,21 @@ extension BookListViewModel {
     }
     
     /// 검색어를 통해 검색 API 요청
-    func load(query: BookQuery) {
+    private func load(query: BookQuery) {
         let requestValue = SearchBookUseCaseRequestValue(
             query: query,
             start: nextPage,
             display: displayNum
         )
         
+        if isLoading { return }
+        isLoading = true
         useCase.execute(
             requestValue: requestValue,
             cached: appendPage
         ) { [weak self] result in
             guard let self = self else { return }
-            
+            self.isLoading = false
             switch result {
             case .success(let booksPage):
                 self.appendPage(booksPage)
@@ -130,6 +133,11 @@ extension BookListViewModel {
         var array = bookList.value
         array.removeAll()
         bookList.accept(array)
+    }
+    
+    /// Paging 처리
+    func prefetchRow(queryStr: String) {
+        load(query: BookQuery(query: queryStr))
     }
     
     /// 해당 index의 Book 모델 리턴
