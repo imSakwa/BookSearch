@@ -19,8 +19,18 @@ final class BookListTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    private lazy var bookInfoStackView: UIStackView = {
+        let stackView = UIStackView(frame: .zero)
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
+    
     private lazy var bookTitle: UILabel = {
         let label = UILabel(frame: .zero)
+        label.numberOfLines = 2
         label.font = .boldSystemFont(ofSize: 16)
         return label
     }()
@@ -79,43 +89,43 @@ extension BookListTableViewCell {
     }
     
     private func setupViewLayout() {
-        [bookImage, bookTitle, bookAuthor, bookPublisher, bookPubDate, bookDescription]
+        [bookImage, bookInfoStackView]
             .forEach { contentView.addSubview($0) }
-              
+        
+        [bookTitle, bookAuthor, bookPublisher, bookPubDate, bookDescription]
+            .forEach { bookInfoStackView.addArrangedSubview($0) }
         
         bookImage.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
             $0.width.equalTo(90)
             $0.height.equalTo(170)
+            $0.top.bottom.equalToSuperview().inset(15)
         }
         
-        bookTitle.snp.makeConstraints {
+        bookInfoStackView.snp.makeConstraints {
+            $0.top.equalTo(bookImage).offset(-1)
             $0.leading.equalTo(bookImage.snp.trailing).offset(12)
             $0.trailing.equalToSuperview().inset(16)
-            $0.top.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(16)
         }
-        
+          
+        bookTitle.snp.makeConstraints {
+            $0.height.lessThanOrEqualTo(40)
+        }
+
         bookAuthor.snp.makeConstraints {
-            $0.leading.equalTo(bookTitle)
-            $0.top.equalTo(bookTitle.snp.bottom).offset(8)
+            $0.height.equalTo(18)
         }
-        
+
         bookPublisher.snp.makeConstraints {
-            $0.leading.equalTo(bookTitle)
-            $0.top.equalTo(bookAuthor.snp.bottom).offset(4)
+            $0.height.equalTo(18)
         }
-        
+
         bookPubDate.snp.makeConstraints {
-            $0.leading.equalTo(bookPublisher.snp.trailing).offset(4)
-            $0.centerY.equalTo(bookPublisher)
+            $0.height.equalTo(18)
         }
-        
-        bookDescription.snp.makeConstraints {
-            $0.leading.trailing.equalTo(bookTitle)
-            $0.top.equalTo(bookPublisher.snp.bottom).offset(12)
-            $0.bottom.equalToSuperview().inset(16).priority(.low)
-        }
+
     }
     
     override func prepareForReuse() {
