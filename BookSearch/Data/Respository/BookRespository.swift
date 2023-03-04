@@ -8,9 +8,9 @@
 import Foundation
 
 final class BookRespository: BookRespositoryProtocol {
-    let storage: CoreDataBooksResponseStorage
+    let storage: BooksResponseStorage
     
-    init(storage: CoreDataBooksResponseStorage) {
+    init(storage: BooksResponseStorage) {
         self.storage = storage
     }
 }

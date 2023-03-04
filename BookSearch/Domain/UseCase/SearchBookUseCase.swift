@@ -15,10 +15,10 @@ protocol SearchBookUseCaseProtocol {
 }
 
 final class SearchBookUseCase: SearchBookUseCaseProtocol {
-    private let bookRepository: BookRespository
-    private let bookQueryRepository: BookQueryRepository
+    private let bookRepository: BookRespositoryProtocol
+    private let bookQueryRepository: BookQueryRepositoryProtocol
 
-    init(bookRepository: BookRespository, bookQueryRepository: BookQueryRepository) {
+    init(bookRepository: BookRespositoryProtocol, bookQueryRepository: BookQueryRepositoryProtocol) {
         self.bookRepository = bookRepository
         self.bookQueryRepository = bookQueryRepository
     }

@@ -30,7 +30,7 @@ final class BookListViewModel: DefaultViewModel {
     private var bookList = BehaviorRelay<[Book]>(value: [])
     private var booksPage: [BooksPage] = []
     private let disposebag = DisposeBag()
-    private let useCase: SearchBookUseCase
+    private let useCase: SearchBookUseCaseProtocol
     private var totalPage: Int = 0
     private var currentPage: Int = 1
     private var hasMorePage: Bool { currentPage < totalPage }
@@ -40,7 +40,7 @@ final class BookListViewModel: DefaultViewModel {
     
     var isLoading: Bool = false
     // MARK: Init
-    init(useCase: SearchBookUseCase) {
+    init(useCase: SearchBookUseCaseProtocol) {
         self.useCase = useCase
     }
 }
