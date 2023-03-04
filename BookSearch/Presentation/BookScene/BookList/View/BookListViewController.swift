@@ -16,6 +16,7 @@ final class BookListViewController: UIViewController {
     // MARK: Property
     private let viewModel: BookListViewModel
     private let disposebag = DisposeBag()
+    private let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: UI Component
     private lazy var searchBar: UISearchBar = {
@@ -25,15 +26,13 @@ final class BookListViewController: UIViewController {
     }()
     
     private lazy var tableViewVC: BookListTableViewController = {
-        let storage = CoreDataBooksResponseStorage()
-        let repository = BookRespository(storage: storage)
-        let queryStorage = CoreDataBookQueryStorage()
-        let queryRepository = BookQueryRepository(storage: queryStorage)
-        let usecase = SearchBookUseCase(
-            bookRepository: repository,
-            bookQueryRepository: queryRepository)
-        let viewModel = BookListViewModel(useCase: usecase)
-        let vc = BookListTableViewController(viewModel: viewModel)
+        let storage = appDelegate.assembler.resolver.resolve(BooksResponseStorage.self)!
+        let repository = appDelegate.assembler.resolver.resolve(BookRespositoryProtocol.self)!
+        let queryStorage = appDelegate.assembler.resolver.resolve(BookQueryStorage.self)!
+        let queryRepository = appDelegate.assembler.resolver.resolve(BookQueryRepositoryProtocol.self)!
+        let usecase = appDelegate.assembler.resolver.resolve(SearchBookUseCaseProtocol.self)!
+        let viewModel = appDelegate.assembler.resolver.resolve(BookListViewModel.self)!
+        let vc = appDelegate.assembler.resolver.resolve(BookListTableViewController.self)!
         return vc
     }()
     
@@ -68,8 +67,8 @@ extension BookListViewController {
         requestValue: FetchRecentBookQueryUseCase.FetchQueryRequestValue,
         completion: @escaping (FetchRecentBookQueryUseCase.ResultValue) -> Void
     ) -> FetchRecentBookQueryUseCase {
-        let queryStorage = CoreDataBookQueryStorage()
-        let queryRepository = BookQueryRepository(storage: queryStorage)
+        let queryStorage = appDelegate.assembler.resolver.resolve(BookQueryStorage.self)!
+        let queryRepository = appDelegate.assembler.resolver.resolve(BookQueryRepositoryProtocol.self)!
         
         return FetchRecentBookQueryUseCase(
             requestValue: requestValue,

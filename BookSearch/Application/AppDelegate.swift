@@ -13,41 +13,19 @@ import Swinject
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    let container: Container = {
-        let container = Container()
-        container.register(CoreDataBooksResponseStorage.self) { _ in
-            return CoreDataBooksResponseStorage()
-        }
-        container.register(BookRespository.self) { resolver in
-            let booksResponseStorage = resolver.resolve(CoreDataBooksResponseStorage.self)!
-            return BookRespository(storage: booksResponseStorage)
-        }
-        container.register(CoreDataBookQueryStorage.self) { _ in
-            return CoreDataBookQueryStorage()
-        }
-        container.register(BookQueryRepository.self) { resolver in
-            let bookQueryStorage = resolver.resolve(CoreDataBookQueryStorage.self)!
-            return BookQueryRepository(storage: bookQueryStorage)
-        }
-        container.register(SearchBookUseCase.self) { resolver in
-            let respository = resolver.resolve(BookRespository.self)!
-            let queryRespository = resolver.resolve(BookQueryRepository.self)!
-            return SearchBookUseCase(
-                bookRepository: respository,
-                bookQueryRepository: queryRespository
-            )
-        }
-        container.register(BookListViewModel.self) { resolver in
-            let usecase = resolver.resolve(SearchBookUseCase.self)!
-            return BookListViewModel(useCase: usecase)
-        }
-        container.register(BookListViewController.self) { resolver in
-            let viewModel = resolver.resolve(BookListViewModel.self)!
-            return BookListViewController(viewModel: viewModel)
-        }
-        return container
-    }()
+    let container = Container()
+    var assembler: Assembler!
 
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        assembler = Assembler([
+            RepositoryAssembler(),
+            UseCaseAssember(),
+            CoreDataAssembler(),
+            ViewAssembler(),
+            ViewModelAssembler()
+        ], container: container)
+        return true
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
