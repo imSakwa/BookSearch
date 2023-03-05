@@ -21,9 +21,9 @@ final class ViewAssembler: Assembly {
             return BookListTableViewController(viewModel: viewModel)
         }
         
-        container.register(BookDetailViewController.self) { resolver in
-            let viewModel = resolver.resolve(BookDetailViewModel.self)!
-            return BookDetailViewController(viewModel: viewModel)
+        container.register(BookDetailViewController.self) { _ in
+//            let viewModel = resolver.resolve(BookDetailViewModel.self)!
+            return BookDetailViewController()
         }
     }
 }

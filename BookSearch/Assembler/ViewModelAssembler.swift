@@ -16,9 +16,9 @@ final class ViewModelAssembler: Assembly {
             return BookListViewModel(useCase: useCase)
         }
         
-        container.register(BookDetailViewModel.self) { resolver in
-            let book = resolver.resolve(Book.self)!
-            return BookDetailViewModel(book: book)
-        }
+//        container.register(BookDetailViewModel.self) { resolver in
+//            let book = resolver.resolve(Book.self)!
+//            return BookDetailViewModel(book: book)
+//        }
     }
 }

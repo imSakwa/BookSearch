@@ -13,6 +13,8 @@
 		768439AB29B34756009155C6 /* ViewAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768439AA29B34756009155C6 /* ViewAssembler.swift */; };
 		768439AD29B38389009155C6 /* ViewModelAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768439AC29B38389009155C6 /* ViewModelAssembler.swift */; };
 		768439AF29B386D4009155C6 /* ModelAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768439AE29B386D4009155C6 /* ModelAssembler.swift */; };
+		768439B129B488C6009155C6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768439B029B488C6009155C6 /* AppCoordinator.swift */; };
+		768439B329B48FB7009155C6 /* BookListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768439B229B48FB7009155C6 /* BookListCoordinator.swift */; };
 		76D2EF12299E8909008E6BB7 /* BookDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF11299E8909008E6BB7 /* BookDetailViewModel.swift */; };
 		76D2EF1629A0BBA5008E6BB7 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1529A0BBA5008E6BB7 /* UILabel+.swift */; };
 		76D2EF1B29A67C1A008E6BB7 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */; };
@@ -63,6 +65,8 @@
 		768439AA29B34756009155C6 /* ViewAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAssembler.swift; sourceTree = "<group>"; };
 		768439AC29B38389009155C6 /* ViewModelAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelAssembler.swift; sourceTree = "<group>"; };
 		768439AE29B386D4009155C6 /* ModelAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAssembler.swift; sourceTree = "<group>"; };
+		768439B029B488C6009155C6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		768439B229B48FB7009155C6 /* BookListCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListCoordinator.swift; sourceTree = "<group>"; };
 		76D2EF11299E8909008E6BB7 /* BookDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewModel.swift; sourceTree = "<group>"; };
 		76D2EF1529A0BBA5008E6BB7 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		76D2EF1A29A67C1A008E6BB7 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
@@ -283,6 +287,7 @@
 			children = (
 				76F668CC299685E400198F6B /* AppDelegate.swift */,
 				76F668CE299685E400198F6B /* SceneDelegate.swift */,
+				768439B029B488C6009155C6 /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -310,6 +315,7 @@
 		76F668F22996925800198F6B /* BookList */ = {
 			isa = PBXGroup;
 			children = (
+				768439B229B48FB7009155C6 /* BookListCoordinator.swift */,
 				76F668F32996926000198F6B /* View */,
 				76F668F82997619D00198F6B /* ViewModel */,
 			);
@@ -546,6 +552,7 @@
 				76F6691F2998CBB000198F6B /* BookListTableViewCell.swift in Sources */,
 				768439AF29B386D4009155C6 /* ModelAssembler.swift in Sources */,
 				76F668D1299685E400198F6B /* BookListViewController.swift in Sources */,
+				768439B129B488C6009155C6 /* AppCoordinator.swift in Sources */,
 				76F66911299786D300198F6B /* BookListResponseDTO.swift in Sources */,
 				76F668CD299685E400198F6B /* AppDelegate.swift in Sources */,
 				76D2EF3B29A91D3B008E6BB7 /* BookQueryListTableViewCell.swift in Sources */,
@@ -554,6 +561,7 @@
 				768439A529B33C60009155C6 /* RepositoryAssembler.swift in Sources */,
 				76F669222998D42B00198F6B /* DefaultViewModel.swift in Sources */,
 				76D2EF4129A9E3E0008E6BB7 /* BookQuery.swift in Sources */,
+				768439B329B48FB7009155C6 /* BookListCoordinator.swift in Sources */,
 				768439AD29B38389009155C6 /* ViewModelAssembler.swift in Sources */,
 				76D2EF3D29A9E28E008E6BB7 /* BookQueryRepository.swift in Sources */,
 				76D2EF1B29A67C1A008E6BB7 /* CoreDataStorage.swift in Sources */,

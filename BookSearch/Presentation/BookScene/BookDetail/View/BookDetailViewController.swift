@@ -15,7 +15,7 @@ final class BookDetailViewController: UIViewController {
     
     // MARK: Property
     private let disposebag = DisposeBag()
-    private let bookDetailViewModel: BookDetailViewModel
+    var bookDetailViewModel: BookDetailViewModel!
     
     // MARK: UI Component
     private lazy var scrollView: UIScrollView = {
@@ -64,9 +64,7 @@ final class BookDetailViewController: UIViewController {
     }()
         
     // MARK: - Life Cycle
-    init(viewModel: BookDetailViewModel) {
-        bookDetailViewModel = viewModel
-        
+    init() {
         super.init(nibName: nil, bundle: nil)
     }
     

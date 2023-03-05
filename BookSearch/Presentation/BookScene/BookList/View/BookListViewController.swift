@@ -11,7 +11,12 @@ import RxCocoa
 import RxSwift
 import SnapKit
 
-final class BookListViewController: UIViewController {
+protocol BooKListVCProtocol: AnyObject {
+    var onBookSelected: ((BookDetailViewModel) -> Void)? { get set }
+}
+
+final class BookListViewController: UIViewController, BooKListVCProtocol {
+    var onBookSelected: ((BookDetailViewModel) -> Void)?
     
     // MARK: Property
     private let viewModel: BookListViewModel
@@ -122,8 +127,7 @@ extension BookListViewController {
             .rx.modelSelected(Book.self)
             .subscribe(onNext: { [weak self] book in
                 let bookDetailViewModel = BookDetailViewModel(book: book)
-                let bookDetailVC = BookDetailViewController(viewModel: bookDetailViewModel)
-                self?.navigationController?.pushViewController(bookDetailVC, animated: true)
+                self?.onBookSelected?(bookDetailViewModel)
             })
             .disposed(by: disposebag)
         
