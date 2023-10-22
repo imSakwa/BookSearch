@@ -1,4 +1,4 @@
-# BookSearch [🚧 공사중...]
+# BookSearch
 클린아키텍처 예제를 참고해 Naver 책 검색 API를 활용한 예제 프로젝트입니다.
 
 ## 프로젝트 구조
@@ -14,9 +14,6 @@ Data Layer | Presentation Layer | Domain Layer |  Infrastructure
 ## 사용 기술
 - 아키텍처: MVVM + Clean Architecture
 - 라이브러리: SnapKit, RxSwift, Swinject
-
-## 후기
-<< 블로그 주소 들어갈 자리 >>
 
 ## 참고
 https://github.com/kudoleh/iOS-Clean-Architecture-MVVM<br>
