@@ -7,6 +7,8 @@
 
 import CoreData
 
+import RxSwift
+
 final class CoreDataStorage {
     static let shared = CoreDataStorage()
     
@@ -38,5 +40,27 @@ final class CoreDataStorage {
     
     func performBackgroundTask(task: @escaping (NSManagedObjectContext) -> Void) {
         persistentContainer.performBackgroundTask(task)
+    }
+    
+    func performBackgroundTask() -> Observable<NSManagedObjectContext> {
+        return Observable.create { observer in
+            self.persistentContainer.performBackgroundTask { backgroundContext in
+                if backgroundContext.hasChanges {
+                    do {
+                        try backgroundContext.save()
+                        observer.onNext(backgroundContext)
+                        observer.onCompleted()
+                        
+                    } catch {
+                        observer.onError(error)
+                    }
+                } else {
+                    observer.onNext(backgroundContext)
+                    observer.onCompleted()
+                }
+            }
+            
+            return Disposables.create()
+        }
     }
 }
