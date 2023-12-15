@@ -7,6 +7,8 @@
 
 import Foundation
 
+import RxSwift
+
 final class BookRespository: BookRespositoryProtocol {
     let storage: BooksResponseStorage
     
@@ -50,5 +52,43 @@ extension BookRespository {
                 }
             }
         }
+    }
+    
+    func fetchBookList(
+        query: BookQuery,
+        display: Int,
+        start: Int,
+        sort: BookSort
+    ) -> Observable<Result<BooksPage, Error>> {
+        let requsetDTO = BookListRequestDTO(
+            query: query.query,
+            display: display,
+            start: start,
+            sort: sort
+        )
+        
+        let endpoint = APIEndPoint.getBookList(with: requsetDTO)
+        let provider = NetworkProvider()
+        
+        
+        return storage.getBookResponse(request: requsetDTO)
+            .flatMap { result in
+                switch result {
+                case .success(let responseDTO?):
+                    return Observable.create { observer in
+                        let result: Result<BooksPage, Error> = .success(responseDTO.toDomain())
+                        observer.onNext(result)
+                        
+                        return Disposables.create()
+                    }
+                case .failure(_):
+                    return provider.request(with: endpoint)
+                        .map { response in
+                                return .success(response.toDomain())
+                        } // Observable<Result>
+                default:
+                    break
+                }
+            }
     }
 }
