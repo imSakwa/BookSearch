@@ -8,6 +8,8 @@
 import Foundation
 import CoreData
 
+import RxSwift
+
 final class CoreDataBooksResponseStorage {
     private let storage: CoreDataStorage
     
@@ -31,6 +33,23 @@ extension CoreDataBooksResponseStorage: BooksResponseStorage {
                 completion(.failure(Error.self as! Error))
             }
         }
+    }
+    
+    func getBookResponse(
+        request: BookListRequestDTO
+    ) -> Observable<Result<BookListResponseDTO?, Error>> {
+        return storage.performBackgroundTask()
+            .map { context in
+                do {
+                    let fetchRequest = BookListRequestEntity.fetchRequest()
+                    let requestEntity = try context.fetch(fetchRequest).first
+                    
+                    return .success(requestEntity?.response?.toDTO())
+                    
+                } catch {
+                    return .failure(error)
+                }
+            }
     }
     
     func save(response: BookListResponseDTO, request: BookListRequestDTO) {
