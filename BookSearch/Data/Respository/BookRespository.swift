@@ -11,6 +11,7 @@ import RxSwift
 
 final class BookRespository: BookRespositoryProtocol {
     let storage: BooksResponseStorage
+    private let disposeBag = DisposeBag()
     
     init(storage: BooksResponseStorage) {
         self.storage = storage
@@ -60,35 +61,40 @@ extension BookRespository {
         start: Int,
         sort: BookSort
     ) -> Observable<Result<BooksPage, Error>> {
-        let requsetDTO = BookListRequestDTO(
+        let requestDTO = BookListRequestDTO(
             query: query.query,
             display: display,
             start: start,
             sort: sort
         )
         
-        let endpoint = APIEndPoint.getBookList(with: requsetDTO)
+        let endpoint = APIEndPoint.getBookList(with: requestDTO)
         let provider = NetworkProvider()
         
-        
-        return storage.getBookResponse(request: requsetDTO)
-            .flatMap { result in
-                switch result {
-                case .success(let responseDTO?):
-                    return Observable.create { observer in
-                        let result: Result<BooksPage, Error> = .success(responseDTO.toDomain())
-                        observer.onNext(result)
+        return Observable.create { observer in
+            self.storage.getBookResponse(request: requestDTO)
+                .subscribe(onNext: { result in
+                    switch result {
+                    case .success(let responseDTO):
+                        observer.onNext(.success(responseDTO.toDomain()))
+                        observer.onCompleted()
                         
-                        return Disposables.create()
+                    case .failure(_):
+                        provider.request(with: endpoint)
+                            .subscribe(onNext: { response in
+                                let temp: BooksPage = response.toDomain()
+                                observer.onNext(.success(temp))
+                                observer.onCompleted()
+                            }, onError: { error in
+                                observer.onNext(.failure(error))
+                            })
+                            .disposed(by: self.disposeBag)
                     }
-                case .failure(_):
-                    return provider.request(with: endpoint)
-                        .map { response in
-                                return .success(response.toDomain())
-                        } // Observable<Result>
-                default:
-                    break
-                }
-            }
+                })
+                .disposed(by: self.disposeBag)
+            
+            return Disposables.create()
+            
+        }
     }
 }
