@@ -7,11 +7,17 @@
 
 import Foundation
 
+import RxSwift
+
 protocol SearchBookUseCaseProtocol {
     /// 책 검색 유스케이스
     func execute(requestValue: SearchBookUseCaseRequestValue,
                  cached: @escaping (BooksPage) -> Void,
                  completion: @escaping (Result<BooksPage, Error>) -> Void)
+    
+    func execute(
+        requestValue: SearchBookUseCaseRequestValue
+    ) -> Observable<Result<BooksPage, Error>>
 }
 
 final class SearchBookUseCase: SearchBookUseCaseProtocol {
@@ -39,6 +45,26 @@ final class SearchBookUseCase: SearchBookUseCaseProtocol {
             }
             completion(result)
         }
+    }
+    
+    func execute(
+        requestValue: SearchBookUseCaseRequestValue
+    ) -> Observable<Result<BooksPage, Error>> {
+        
+        return bookRepository.fetchBookList(
+            query: requestValue.query,
+            display: requestValue.display,
+            start: requestValue.start,
+            sort: requestValue.sort
+        )
+        .map { result in
+            if case .success(_) = result {
+                self.bookQueryRepository.saveRecentQuery(query: requestValue.query) { _ in }
+            }
+            
+            return result
+        }
+        
     }
     
 }
