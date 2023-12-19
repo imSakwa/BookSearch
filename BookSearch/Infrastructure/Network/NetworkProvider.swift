@@ -75,10 +75,12 @@ final class NetworkProvider: NetworkProviderProtocol {
         with endpoint: E
     ) -> Observable<R> where E.Response == R {
         return Observable<R>.create { observer in
+            var task: URLSessionDataTask?
+            
             do {
                 let urlRequest = try endpoint.getURLRequest()
                 
-                let task = self.session.dataTask(with: urlRequest) { data, response, error in
+                task = self.session.dataTask(with: urlRequest) { data, response, error in
                     if let error = error {
                         observer.onError(error)
                         return
@@ -108,14 +110,14 @@ final class NetworkProvider: NetworkProviderProtocol {
                     }
                 }
                 
-                task.resume()
-                
-                return Disposables.create {
-                    task.cancel()
-                }
+                task?.resume()
                 
             } catch {
                 observer.onError(NetworkError.needErrorControl)
+            }
+            
+            return Disposables.create {
+                task?.cancel()
             }
         }
     }
