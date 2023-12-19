@@ -17,7 +17,7 @@ protocol BooksResponseStorage {
     
     func getBookResponse(
         request: BookListRequestDTO
-    ) -> Observable<Result<BookListResponseDTO?, Error>>
+    ) -> Observable<Result<BookListResponseDTO, Error>>
     
     func save(response: BookListResponseDTO, request: BookListRequestDTO)
 }

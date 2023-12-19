@@ -37,14 +37,18 @@ extension CoreDataBooksResponseStorage: BooksResponseStorage {
     
     func getBookResponse(
         request: BookListRequestDTO
-    ) -> Observable<Result<BookListResponseDTO?, Error>> {
+    ) -> Observable<Result<BookListResponseDTO, Error>> {
         return storage.performBackgroundTask()
             .map { context in
                 do {
                     let fetchRequest = BookListRequestEntity.fetchRequest()
                     let requestEntity = try context.fetch(fetchRequest).first
                     
-                    return .success(requestEntity?.response?.toDTO())
+                    guard let responseDTO = requestEntity?.response?.toDTO() as? BookListResponseDTO else {
+                        // TODO: 에러처리
+                        fatalError()
+                    }
+                    return .success(responseDTO)
                     
                 } catch {
                     return .failure(error)
